@@ -7,7 +7,7 @@ import json
 import  mysql.connector
 
 DB_Host = "127.0.0.1"
-DB_Name = "TaipeiSights"
+DB_Name = "taipeisights"
 DB_User = "root"
 DB_Pwd  = "password"
 
@@ -39,10 +39,10 @@ def SearchSight(page, keyword):
 	# 根據是否有 關鍵字，決定所使用的 SQL 語法
     if keyword != '':
         searchKeyword = '%' + keyword + '%'
-        sql = "SELECT * FROM sightData WHERE name LIKE %s LIMIT 12 OFFSET %s;"
+        sql = "SELECT * FROM sightdata WHERE name LIKE %s LIMIT 12 OFFSET %s;"
         variable = (searchKeyword, pageStartIndex)
     else:
-        sql = "SELECT * FROM sightData LIMIT 12 OFFSET %s;"
+        sql = "SELECT * FROM sightdata LIMIT 12 OFFSET %s;"
         variable = (pageStartIndex, )
 
     cursor.execute(sql, variable)
@@ -64,11 +64,11 @@ def SearchSightCount(keyword):
     TotalCount = 0
     if keyword != '':
         searchKeyword = '%' + keyword + '%'
-        sql = "SELECT COUNT(id) FROM sightData WHERE name LIKE %s;"
+        sql = "SELECT COUNT(id) FROM sightdata WHERE name LIKE %s;"
         variable = (searchKeyword, )
         cursor.execute(sql, variable)
     else:
-        sql = "SELECT COUNT(id) FROM sightData;"
+        sql = "SELECT COUNT(id) FROM sightdata;"
         cursor.execute(sql)
 
     SearchResult = cursor.fetchone()   
@@ -121,12 +121,12 @@ def Build_Resp_SightDataJSON(SearchResult, nextPageNum):
 		"data" : dataList
 	}
 
-    return json.dumps(Response) # sort_keys=False 不要依字母順序將JSON Key排序
+    return json.dumps(Response,  ensure_ascii = False) # sort_keys=False 不要依字母順序將JSON Key排序
 
 ############################## API-2 ################################
 # [查]讀取 database 資料，查詢 資料庫中有無 此景點編號( id )
 def SearchSightById(id):
-    sql = "SELECT * FROM sightData WHERE id = %s"
+    sql = "SELECT * FROM sightdata WHERE id = %s"
     variable = (id, )
     cursor.execute(sql, variable)
     SearchResult = cursor.fetchone()
@@ -177,7 +177,7 @@ def Build_Resp_SightDataJSONById(SearchResult):
 		"data" : data
 	}
 
-    return json.dumps(Response)
+    return json.dumps(Response,  ensure_ascii = False)
 
 ##############################################################
 app=Flask(__name__)
@@ -220,11 +220,11 @@ def show_sights():
     if SearchResultCount == 0:
        message  ='關鍵字[{keyword}], 查無景點資料'.format( keyword = keyword )
        Response = { "error": 'true', "message": message }
-       return json.dumps(Response), 400
+       return json.dumps(Response, ensure_ascii = False), 400
     elif page > maxPageNum:        
         message  = '搜尋結果共有 0 ~ {Total} 頁,要求頁數超過( {PageIdx} / {MaxPageIdx} )'.format(Total = totalPageCount-1, PageIdx = page, MaxPageIdx = maxPageNum)
         Response = {"error": 'true', "message": message}
-        return json.dumps(Response), 400 
+        return json.dumps(Response, ensure_ascii = False), 400 
     else:        
             # 判斷是否有下一頁
             if page < maxPageNum: 
@@ -239,7 +239,6 @@ def show_sights():
             Response = Build_Resp_SightDataJSON(SearchResult, nextPage)
             return Response   
     return "雞塊餅乾"
-
 # API-2 根據景點編號取得景點資料
 @app.route("/api/attraction/<int:id>", methods = ['GET'])
 def api_attraction_id(id):
@@ -250,7 +249,7 @@ def api_attraction_id(id):
 	# 若景點編號錯誤 則回傳 400
     if SearchResult == None:
         Response = {"error": 'true', "message": '景點編號不正確'}
-        return json.dumps(Response),400
+        return json.dumps(Response,  ensure_ascii = False),400
     else:
         Response = Build_Resp_SightDataJSONById(SearchResult)            
         return Response
