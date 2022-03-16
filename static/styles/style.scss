@@ -1,0 +1,350 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 1rem;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+header{
+    width: 100%;
+    min-height: 54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+
+    /*step 1 整個header移動時固定在上方 => Sticky Header*/
+    position: sticky; 
+    /*step 2*/
+    top: 0;
+    /*step 3 設定最大數值，確保在整個網頁的最上面*/
+    z-index: 1000;
+
+    // outline: 1px solid red;
+    nav{
+        width: 75rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        // outline: 1px solid blue;        
+        h2{
+            color: #448899;
+            // outline: 1px solid green;
+        }
+        ul{
+            display: flex;
+            justify-content: space-between;
+            list-style-type: none;
+            width: 14%;
+            // outline: 1px solid green;
+            li{
+                a{
+                    text-decoration: none;
+                    font-size: 1rem;
+                    color: #666666;
+                }
+            }
+        }
+    }         
+}
+main{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    section.title{
+        max-height: 320px; 
+        background: linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
+        display: flex; 
+        align-items: center;
+        justify-content: space-evenly;
+        margin-bottom: 55px;
+        
+        div.greeting{
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 7rem;
+            
+            p.title{
+                font-size: 1.75rem;
+                font-weight: 500;
+                color: 	#FFFFFF;
+                margin-bottom: 1rem;
+            }
+            p{
+                color: 	#FFFFFF; 
+                margin-bottom: 1.5rem;
+            }
+            div.search{
+                /* 將按鈕設絕對定位在容器的右下角-Step 1*/
+                display: flex;
+                position: relative;
+                // outline: 1px solid orangered;
+                input.searchBar{
+                    width: 28rem;
+                    border: none;
+                    border-radius: 5px 0 0 5px;
+
+                    // 取消點擊 input 後顯示的默認邊框 
+                    outline: none;
+
+                    // 調整input裡面placeholder的文字垂直置中 [待]
+                    height: 2.5rem;
+                    // line-height: 1px; //move
+                    font-size: 1rem;
+                    padding: 0.5rem;
+                    vertical-align: middle;
+
+                    position: relative;  //勿動
+                    z-index: 10; 
+                }
+                ::placeholder{
+                    font-weight: 800;
+                    color: #757575;
+                    // vertical-align: middle;  //垂直置中 無效果
+                    height: 2.5rem;
+                    line-height: 2.5rem;
+                    
+                }
+                button.searchBtn{
+                    width: 3.5rem;
+                    height: 2.5rem;
+                    background-color: #448899;
+                    border: none;
+                    border-radius:  0 5px 5px 0;
+                    margin-left: -3rem;
+                    z-index: 10;
+                    cursor: pointer; 
+
+                    /* 將按鈕設絕對定位在容器的右下角-Step 2*/
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    img{
+                        vertical-align: middle;  //垂直置中 有效果  
+                    }
+                }    
+            }
+        }
+        div.backgroundImage{
+            position: relative;
+            z-index: 1;
+            img{
+                max-width: 100%;
+                vertical-align: -5px;
+            }           
+        }
+    }
+    
+    section.images{
+        width: 75rem;
+        display: flex;
+        margin: auto;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        // outline: 1px solid red;       
+        div.cards{
+            display: flex;
+            flex-direction: column;
+            margin: 0rem;           
+            position: relative;
+            margin-bottom: 30px;
+            img{
+                max-width: 100%;
+                border-radius: 5px 5px 0 0;
+            }
+            p.capUp, div.capDown{
+                background-color: #FFFFFF;
+                padding: 0.3rem;
+                border: solid #BEBEBE 1px;
+                color: #757575;
+
+                /*所有項目依原比例自動延伸，填滿容器*/
+                flex-grow: 1;                  
+            }
+            p.capUp{
+                width: 16.875rem;
+                font-weight: 600;
+                border-style: none solid;
+                position: absolute;
+                left: 0;
+                bottom: 34px;                
+            }
+            div.capDown{
+                display: flex;
+                justify-content: space-between;
+                border-radius: 0 0 5px 5px;
+                border-style: none solid solid solid;
+            }
+        }
+    }
+}
+footer{
+    background-color: #757575;
+    display: flex;
+    min-height: 104px;
+    p{
+        color: #FFFFFF;
+        margin: auto;
+        font-weight: 500;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    header{
+        nav{
+            width: 90%;                          
+        }
+    }
+    main{
+        section.title{
+            div.greeting{
+                width: 40%;
+                margin-left: 2rem;
+            }
+            div.backgroundImage{
+                margin-left: 0.5rem;
+                img{
+                    width: 50vw;
+                    height: 26vw;
+                }    
+            }           
+        }
+        section.images{
+            width: 90%;
+            justify-content: space-between;
+            div.cards{
+                margin: 0rem;
+                margin-bottom: 1.875rem;
+                img{
+                    width: 43.75vw;  
+                    height: 33vh;
+                }
+                p.capUp, div.capDown{
+                    width: 43.75vw; 
+                    height: 2.5rem;
+                    padding: 0.5rem;
+                }
+            }
+        }
+    }  
+}
+@media screen and (max-width: 600px){
+    header{
+        nav{
+            width: 90%;
+            ul{
+                width: 30%;
+            }                               
+        }
+    }
+    main{
+        section.title{
+            max-height: 250px;
+            justify-content: space-between;  
+            div.greeting{
+                width: 60%;
+                margin-left: 1.5rem;
+                position: absolute;
+                z-index: 10;  
+                div.search{
+                    input.searchBar{
+                        width: 23rem;
+                        border-radius: 5px;
+                    }
+                    button.searchBtn{
+                        width: 3rem;
+                    }
+                }        
+            }
+            div.backgroundImage{
+                width: 60%;
+                margin-left: 18rem;               
+                img{
+                    width: 85vw;
+                    height: 38vh;
+                }    
+            }           
+        }
+        section.images{
+            justify-content: space-between;
+            div.cards{
+                margin-bottom: 0.75rem;
+                img{
+                    width: 44vw;
+                    height: 38vh;                   
+                }
+                p.capUp, div.capDown{
+                    width: 44vw; 
+                    height: 3rem;
+                    line-height: 3rem;
+                    padding: 0 0.2rem;
+                       
+                }
+                p.capUp{
+                    bottom: 48px;
+                }                
+            }            
+        }       
+    }
+}
+@media screen and (max-width: 360px){
+    header{
+        nav{
+            width: 100%;
+            justify-content: space-around;
+            h2{
+                width: 35%;
+                vertical-align: middle;
+            }
+            ul{
+                width: 42.5%; 
+                vertical-align: middle;
+            }
+        }
+    }
+    main{
+        margin-bottom: 40px;
+        section.title{
+            min-height: 280px;
+            position: relative;
+            overflow: hidden;
+            div.greeting{
+                width: 80%;
+            }
+            div.backgroundImage{
+                width: 85%;
+                margin-left: 10rem;
+                position: absolute;
+                right: -85px;
+                bottom: -13px;
+                img{  
+                    height: 24vh;    
+                }    
+            } 
+        }
+        section.images{
+            justify-content: center;
+            div.cards{  
+                width: 90%;
+                margin-bottom: 15px;
+                img{                   
+                    width: 322px;
+                    height: 202px;                              
+                }
+                p.capUp, div.capDown{
+                    width: 100%;
+                    height: 39px;
+                    line-height: 39px;
+                    padding: 0 0.5rem;
+                } 
+                p.capUp{
+                    bottom: 38px;
+                }   
+            }
+        }
+    }
+}

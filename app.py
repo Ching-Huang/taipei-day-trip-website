@@ -179,7 +179,7 @@ def Build_Resp_SightDataJSONById(SearchResult):
 
     return json.dumps(Response,  ensure_ascii = False)
 
-##############################################################
+#####################################################################
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
@@ -218,7 +218,7 @@ def show_sights():
 
 	# 如查詢結果筆數為 0 ，則代表 無景點
     if SearchResultCount == 0:
-       message  ='關鍵字[{keyword}], 查無景點資料'.format( keyword = keyword )
+       message  ='關鍵字[{keyword}]，查無景點資料'.format( keyword = keyword )
        Response = { "error": 'true', "message": message }
        return json.dumps(Response, ensure_ascii = False), 400
     elif page > maxPageNum:        
@@ -238,7 +238,7 @@ def show_sights():
             # 建立回傳的JSON
             Response = Build_Resp_SightDataJSON(SearchResult, nextPage)
             return Response   
-    return "雞塊餅乾"
+    
 # API-2 根據景點編號取得景點資料
 @app.route("/api/attraction/<int:id>", methods = ['GET'])
 def api_attraction_id(id):
@@ -260,4 +260,4 @@ def handle_500():
     Response = {"error": True, "message": '伺服器內部錯誤'}
     return make_response(jsonify(Response), 500)
 
-app.run(port=3000, debug=True) #, debug=True
+app.run(port=3000, debug=True) 
