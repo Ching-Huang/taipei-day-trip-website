@@ -366,19 +366,15 @@ footer p {
   }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 414px) {
   header nav {
-    width: 100%;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
+    width: 90%;
   }
   header nav h2 {
-    width: 35%;
-    vertical-align: middle;
+    width: 40%;
   }
   header nav ul {
-    width: 42.5%;
-    vertical-align: middle;
+    width: 45%;
   }
   main {
     margin-bottom: 40px;
@@ -402,17 +398,15 @@ footer p {
     height: 24vh;
   }
   main section.images {
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    width: 90%;
   }
   main section.images div.cards {
-    width: 90%;
+    width: 372px;
     margin-bottom: 15px;
   }
   main section.images div.cards img {
-    width: 322px;
-    height: 202px;
+    width: 100%;
+    height: 252px;
   }
   main section.images div.cards p.capUp, main section.images div.cards div.capDown {
     width: 100%;
@@ -422,6 +416,86 @@ footer p {
   }
   main section.images div.cards p.capUp {
     bottom: 38px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  header nav {
+    width: 100%;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  header nav h2 {
+    width: 35%;
+  }
+  header nav ul {
+    width: 42.5%;
+  }
+  main {
+    margin-bottom: 40px;
+  }
+  main section.title {
+    min-height: 280px;
+  }
+  main section.title div.greeting {
+    width: 80%;
+  }
+  main section.title div.backgroundImage {
+    width: 85%;
+  }
+  main section.title div.backgroundImage img {
+    height: 24vh;
+  }
+  main section.images {
+    width: 90%;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  main section.images div.cards {
+    width: 322px;
+    margin-bottom: 15px;
+  }
+  main section.images div.cards img {
+    width: 100%;
+    height: 202px;
+  }
+  main section.images div.cards p.capUp, main section.images div.cards div.capDown {
+    width: 100%;
+    height: 39px;
+    line-height: 39px;
+    padding: 0 0.5rem;
+  }
+  main section.images div.cards p.capUp {
+    bottom: 39px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  header nav {
+    width: 100%;
+  }
+  header nav h2 {
+    width: 40%;
+  }
+  header nav ul {
+    width: 45%;
+  }
+  main {
+    margin-bottom: 40px;
+  }
+  main section.title {
+    min-height: 280px;
+  }
+  main section.title div.greeting {
+    width: 90%;
+    margin-left: 1rem;
+  }
+  main section.title div.backgroundImage {
+    width: 85%;
+  }
+  main section.title div.backgroundImage img {
+    height: 24vh;
   }
 }
 /*# sourceMappingURL=style.css.map */

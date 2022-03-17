@@ -244,7 +244,7 @@ footer{
     main{
         section.title{
             max-height: 250px;
-            justify-content: space-between;  
+            justify-content: space-between;
             div.greeting{
                 width: 60%;
                 margin-left: 1.5rem;
@@ -262,7 +262,7 @@ footer{
             }
             div.backgroundImage{
                 width: 60%;
-                margin-left: 18rem;               
+                margin-left: 18rem;              
                 img{
                     width: 85vw;
                     height: 38vh;
@@ -291,18 +291,15 @@ footer{
         }       
     }
 }
-@media screen and (max-width: 360px){
+@media screen and (max-width: 414px){
     header{
         nav{
-            width: 100%;
-            justify-content: space-around;
+            width: 90%;
             h2{
-                width: 35%;
-                vertical-align: middle;
+                width: 40%;                
             }
             ul{
-                width: 42.5%; 
-                vertical-align: middle;
+                width: 45%;                 
             }
         }
     }
@@ -327,13 +324,13 @@ footer{
             } 
         }
         section.images{
-            justify-content: center;
+            width: 90%;
             div.cards{  
-                width: 90%;
+                width: 372px;
                 margin-bottom: 15px;
                 img{                   
-                    width: 322px;
-                    height: 202px;                              
+                    width: 100%;
+                    height: 252px;                              
                 }
                 p.capUp, div.capDown{
                     width: 100%;
@@ -345,6 +342,85 @@ footer{
                     bottom: 38px;
                 }   
             }
+        }
+    }
+}
+@media screen and (max-width: 360px){
+    header{
+        nav{
+            width: 100%;
+            justify-content: space-around;
+            h2{
+                width: 35%;
+            }
+            ul{
+                width: 42.5%; 
+            }
+        }
+    }
+    main{
+        margin-bottom: 40px;
+        section.title{
+            min-height: 280px;
+            div.greeting{
+                width: 80%;
+            }
+            div.backgroundImage{
+                width: 85%;
+                img{  
+                    height: 24vh;    
+                }    
+            } 
+        }
+        section.images{
+            width: 90%;
+            justify-content: center;
+            div.cards{  
+                width: 322px;
+                margin-bottom: 15px;
+                img{                   
+                    width: 100%;
+                    height: 202px;                              
+                }
+                p.capUp, div.capDown{
+                    width: 100%;
+                    height: 39px;
+                    line-height: 39px;
+                    padding: 0 0.5rem;
+                } 
+                p.capUp{
+                    bottom: 39px;
+                }   
+            }
+        }
+    }
+}
+@media screen and (max-width: 320px){
+    header{
+        nav{
+            width: 100%;
+            h2{
+                width: 40%;
+            }
+            ul{
+                width: 45%; 
+            }
+        }
+    }
+    main{
+        margin-bottom: 40px;
+        section.title{
+            min-height: 280px;
+            div.greeting{
+                width: 90%;
+                margin-left: 1rem;
+            }
+            div.backgroundImage{
+                width: 85%;
+                img{  
+                    height: 24vh;    
+                }    
+            } 
         }
     }
 }
