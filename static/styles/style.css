@@ -24,7 +24,7 @@ header {
       -ms-flex-align: center;
           align-items: center;
   background-color: #FFFFFF;
-  /*step 1 整個header移動時固定在上方 => Sticky Header*/
+  /*step 1 整個 header 移動時固定在上方 => Sticky Header*/
   position: -webkit-sticky;
   position: sticky;
   /*step 2*/
@@ -60,11 +60,11 @@ header nav ul {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
-  list-style-type: none;
-  width: 70%;
   -webkit-box-flex: 3;
       -ms-flex: 3 1 100px;
           flex: 3 1 100px;
+  list-style-type: none;
+  width: 70%;
 }
 
 header nav ul li {
@@ -95,22 +95,35 @@ main {
 }
 
 main section.title {
-  max-height: 320px;
+  min-height: 320px;
   background: linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 55px;
+  position: relative;
+}
+
+main section.title div#textContent {
+  width: 75rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  margin-bottom: 55px;
+  position: absolute;
+  z-index: 10;
 }
 
-main section.title div.greeting {
-  width: 35%;
+main section.title div#textContent div.greeting {
+  width: 40%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -118,32 +131,28 @@ main section.title div.greeting {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin-left: 8rem;
 }
 
-main section.title div.greeting p.title {
+main section.title div#textContent div.greeting p.title {
   font-size: 1.75rem;
   font-weight: 500;
   color: #FFFFFF;
   margin-bottom: 1rem;
 }
 
-main section.title div.greeting p {
+main section.title div#textContent div.greeting p {
   color: #FFFFFF;
   margin-bottom: 1.5rem;
 }
 
-main section.title div.greeting div.search {
+main section.title div#textContent div.greeting div.search {
   /* 搜尋按鈕置右 Step 1 */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-main section.title div.greeting div.search input.searchBar {
+main section.title div#textContent div.greeting div.search input.searchBar {
   width: 28rem;
   border: none;
   border-radius: 5px 0 0 5px;
@@ -157,35 +166,35 @@ main section.title div.greeting div.search input.searchBar {
   z-index: 10;
 }
 
-main section.title div.greeting div.search ::-webkit-input-placeholder {
+main section.title div#textContent div.greeting div.search ::-webkit-input-placeholder {
   font-weight: 800;
   color: #757575;
   height: 2.5rem;
   line-height: 2.5rem;
 }
 
-main section.title div.greeting div.search :-ms-input-placeholder {
+main section.title div#textContent div.greeting div.search :-ms-input-placeholder {
   font-weight: 800;
   color: #757575;
   height: 2.5rem;
   line-height: 2.5rem;
 }
 
-main section.title div.greeting div.search ::-ms-input-placeholder {
+main section.title div#textContent div.greeting div.search ::-ms-input-placeholder {
   font-weight: 800;
   color: #757575;
   height: 2.5rem;
   line-height: 2.5rem;
 }
 
-main section.title div.greeting div.search ::placeholder {
+main section.title div#textContent div.greeting div.search ::placeholder {
   font-weight: 800;
   color: #757575;
   height: 2.5rem;
   line-height: 2.5rem;
 }
 
-main section.title div.greeting div.search button.searchBtn {
+main section.title div#textContent div.greeting div.search button.searchBtn {
   width: 3.5rem;
   height: 2.5rem;
   background-color: #448899;
@@ -194,22 +203,32 @@ main section.title div.greeting div.search button.searchBtn {
   margin-left: -3rem;
   z-index: 10;
   cursor: pointer;
+  position: relative;
   /* 搜尋按鈕置右 Step 2 */
   margin-right: 0;
 }
 
-main section.title div.greeting div.search button.searchBtn img {
+main section.title div#textContent div.greeting div.search button.searchBtn img {
   vertical-align: middle;
 }
 
 main section.title div.backgroundImage {
+  width: 40%;
   position: relative;
   z-index: 1;
-  margin-right: 8rem;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  right: 14rem;
+  /* flex佈局設置單個子項目靠右顯示 */
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: right;
 }
 
 main section.title div.backgroundImage img {
   max-width: 100%;
+  height: 16.6vw;
   vertical-align: -5px;
 }
 
@@ -227,6 +246,7 @@ main section.images {
 }
 
 main section.images div.cards {
+  width: 17.34375rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -241,14 +261,17 @@ main section.images div.cards {
 
 main section.images div.cards img {
   max-width: 100%;
+  width: 17.34375rem;
   border-radius: 5px 5px 0 0;
 }
 
 main section.images div.cards p.capUp, main section.images div.cards div.capDown {
   background-color: #FFFFFF;
-  padding: 0.5rem;
+  padding: 0.2rem;
   border: solid #BEBEBE 1px;
   color: #757575;
+  height: 40px;
+  line-height: 35px;
   /*所有項目依原比例自動延伸，填滿容器*/
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
@@ -256,15 +279,16 @@ main section.images div.cards p.capUp, main section.images div.cards div.capDown
 }
 
 main section.images div.cards p.capUp {
-  width: 16.875rem;
+  width: 17.34375rem;
   font-weight: 600;
   border-style: none solid;
   position: absolute;
   left: 0;
-  bottom: 34px;
+  bottom: 40px;
 }
 
 main section.images div.cards div.capDown {
+  width: 17.34375rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -299,30 +323,49 @@ footer p {
   main {
     margin-bottom: 25px;
   }
-  main section.title div.greeting {
-    margin-left: 5rem;
+  main section.title div#textContent {
+    width: 60rem;
   }
-  main section.title div.greeting div.search input.searchBar {
+  main section.title div#textContent div.greeting {
+    width: 45%;
+  }
+  main section.title div#textContent div.greeting div.search input.searchBar {
     border-radius: 5px;
     width: 25rem;
   }
   main section.title div.backgroundImage {
+    width: 45%;
+    right: -1.5rem;
     margin-right: 5rem;
+  }
+  main section.title div.backgroundImage img {
+    height: 26.6vw;
   }
   main section.images {
     width: 90%;
   }
   main section.images div.cards {
+    width: auto;
     margin-bottom: 30px;
   }
   main section.images div.cards img {
     width: 43.75vw;
-    height: 33vh;
+    height: 32.8vw;
   }
   main section.images div.cards p.capUp, main section.images div.cards div.capDown {
     width: 43.75vw;
     height: 2.5rem;
     padding: 0.5rem;
+    line-height: 25px;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  main section.title div#textContent {
+    width: 55rem;
+  }
+  main section.title div#textContent div.greeting {
+    width: 50%;
   }
 }
 
@@ -334,14 +377,26 @@ footer p {
     min-height: 320px;
     overflow: hidden;
   }
-  main section.title div.greeting {
-    width: 60%;
+  main section.title div#textContent {
+    width: 50rem;
+  }
+  main section.title div#textContent div.greeting {
+    width: 55%;
   }
   main section.title div.backgroundImage {
     margin-right: 3rem;
   }
   main section.title div.backgroundImage img {
-    height: 32vh;
+    height: 28vw;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  main section.title div#textContent {
+    width: 45rem;
+  }
+  main section.title div#textContent div.greeting {
+    width: 60%;
   }
 }
 
@@ -349,18 +404,27 @@ footer p {
   header nav ul li {
     width: 18%;
   }
-  main section.title div.greeting {
-    width: 50%;
+  main section.title div#textContent {
+    width: 43rem;
   }
-  main section.title div.greeting div.search input.searchBar {
+  main section.title div#textContent div.greeting {
+    width: 70%;
+  }
+  main section.title div#textContent div.greeting div.search input.searchBar {
     width: 22rem;
   }
+  main section.title div.backgroundImage {
+    width: 50%;
+    position: absolute;
+    bottom: 0;
+    right: -1.5rem;
+  }
   main section.title div.backgroundImage img {
-    height: 27vh;
+    height: 32vw;
   }
   main section.images div.cards img {
     width: 43.047vw;
-    height: 23vh;
+    height: 32.25vw;
   }
   main section.images div.cards p.capUp, main section.images div.cards div.capDown {
     width: 43.047vw;
@@ -379,38 +443,36 @@ footer p {
     overflow: hidden;
     min-height: 320px;
   }
-  main section.title div.greeting {
-    width: 50%;
-    margin-left: 3rem;
+  main section.title div#textContent {
+    width: 39rem;
+  }
+  main section.title div#textContent div.greeting {
+    left: -1.5rem;
     position: absolute;
     z-index: 10;
   }
-  main section.title div.greeting div.search input.searchBar {
+  main section.title div#textContent div.greeting div.search input.searchBar {
     width: 24rem;
   }
   main section.title div.backgroundImage {
-    width: 100%;
-    margin-right: 0.5rem;
+    width: 55%;
     position: absolute;
-    bottom: 0;
-    right: 0;
-    /* flex佈局設置單個子項目靠右顯示 */
-    -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
-    text-align: right;
+    right: -1.5rem;
   }
   main section.title div.backgroundImage img {
-    width: 52vw;
-    height: 30vh;
+    height: 41vw;
   }
-  main section.images div.cards img {
-    width: 43.047vw;
-    height: 26vh;
+  main section.images div.cards p.capUp {
+    position: static;
   }
-  main section.images div.cards p.capUp, main section.images div.cards div.capDown {
-    width: 43.047vw;
-    height: 40px;
+}
+
+@media screen and (max-width: 748px) {
+  main section.title div#textContent {
+    width: 30rem;
+  }
+  main section.title div#textContent div.greeting {
+    left: -2.5rem;
   }
 }
 
@@ -418,25 +480,49 @@ footer p {
   header nav ul li {
     width: 32%;
   }
-  main section.title div.greeting {
-    width: 60%;
+  main section.title div#textContent {
+    width: 28rem;
   }
-  main section.title div.greeting div.search input.searchBar {
+  main section.title div#textContent div.greeting {
+    left: -1rem;
+  }
+  main section.title div#textContent div.greeting div.search input.searchBar {
     width: 20rem;
   }
   main section.title div.backgroundImage {
-    margin-right: 1rem;
+    width: 60%;
+    right: -2rem;
   }
   main section.title div.backgroundImage img {
-    width: 52vw;
-    height: 48vh;
+    height: 48vw;
   }
-  main section.images div.cards img {
-    width: 43.047vw;
-    height: 30vh;
+}
+
+@media screen and (max-width: 534px) {
+  main section.title {
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
   }
-  main section.images div.cards p.capUp, main section.images div.cards div.capDown {
-    width: 43.047vw;
+  main section.title div#textContent {
+    width: 30rem;
+  }
+  main section.title div#textContent div.greeting {
+    left: 2.5rem;
+    position: absolute;
+    z-index: 10;
+  }
+  main section.title div#textContent div.greeting div.search input.searchBar {
+    width: 24rem;
+  }
+}
+
+@media screen and (max-width: 444px) {
+  main section.title div#textContent {
+    width: 30rem;
+  }
+  main section.title div#textContent div.greeting {
+    left: 3.5rem;
   }
 }
 
@@ -455,36 +541,33 @@ footer p {
   }
   main section.title {
     min-height: 280px;
-    position: relative;
-    overflow: hidden;
   }
-  main section.title div.greeting {
-    width: 80%;
-    margin-left: 2rem;
+  main section.title div#textContent {
+    width: 28rem;
   }
-  main section.title div.greeting div.search input.searchBar {
+  main section.title div#textContent div.greeting div.search input.searchBar {
     width: 20rem;
   }
   main section.title div.backgroundImage {
-    margin-right: -3rem;
+    width: 70%;
+    right: -4rem;
   }
   main section.title div.backgroundImage img {
-    width: 75vw;
-    height: 25vh;
+    height: 54vw;
   }
   main section.images {
     width: 90%;
   }
   main section.images div.cards {
-    width: 372px;
+    width: 100%;
     margin-bottom: 15px;
   }
   main section.images div.cards img {
-    width: 100%;
-    height: 252px;
+    width: 90vw;
+    height: 56.5vw;
   }
   main section.images div.cards p.capUp, main section.images div.cards div.capDown {
-    width: 100%;
+    width: 90vw;
     height: 39px;
     line-height: 39px;
     padding: 0 0.5rem;
@@ -510,76 +593,26 @@ footer p {
         -ms-flex: 2 1 50px;
             flex: 2 1 50px;
   }
-  main section.title {
-    position: relative;
+  main section.title div#textContent {
+    width: 26rem;
   }
-  main section.title div.greeting {
-    width: 80%;
-    margin-left: 2rem;
+  main section.title div#textContent div.greeting {
+    left: 4rem;
   }
-  main section.title div.greeting div.search input.searchBar {
+  main section.title div#textContent div.greeting div.search input.searchBar {
     width: 18rem;
   }
   main section.title div.backgroundImage {
-    position: absolute;
-    bottom: 0;
-    right: -2rem;
+    width: 90%;
+    right: -8rem;
   }
   main section.title div.backgroundImage img {
-    width: 78vw;
-    height: 25vh;
+    height: 46vw;
   }
   main section.images {
-    width: 90%;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-  }
-  main section.images div.cards {
-    width: 322px;
-    margin-bottom: 15px;
-  }
-  main section.images div.cards img {
-    width: 100%;
-    height: 202px;
-  }
-  main section.images div.cards p.capUp, main section.images div.cards div.capDown {
-    width: 100%;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 0.3rem;
-  }
-  main section.images div.cards p.capUp {
-    bottom: 30px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  header nav {
-    width: 90%;
-  }
-  header nav h2 {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 70px;
-            flex: 1 1 70px;
-  }
-  header nav ul {
-    -webkit-box-flex: 2;
-        -ms-flex: 2 1 45px;
-            flex: 2 1 45px;
-  }
-  main {
-    margin-bottom: 40px;
-  }
-  main section.title {
-    min-height: 280px;
-  }
-  main section.title div.greeting {
-    width: 90%;
-    margin-left: 1rem;
-  }
-  main section.title div.backgroundImage {
-    right: -0.5rem;
   }
 }
 /*# sourceMappingURL=style.css.map */
