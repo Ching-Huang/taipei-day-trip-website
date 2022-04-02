@@ -60,6 +60,9 @@ async function getSight(page, keyword = null){
         let src               = document.createAttribute('src');        //img 設置 src 屬性
         src.value             = images;
         img.setAttributeNode(src);
+        let title               = document.createAttribute('alt');      //img 設置 title 屬性
+        title.value             = name;
+        img.setAttributeNode(title);
         let alt               = document.createAttribute('alt');        //img 設置 alt 屬性
         alt.value             = name;
         img.setAttributeNode(alt);
@@ -70,6 +73,17 @@ async function getSight(page, keyword = null){
         let height            = document.createAttribute('height');
         height.value          = '202px';
         img.setAttributeNode(height);
+
+        /* [Step 1.]在首頁中的 每個景點 加入 連結 (Part 3-4)(Step 2. in attraction.js) */  
+        let hrefURL = `/attraction/${id}`;
+        // console.log(hrefURL);
+ 
+        let a                 = document.createElement('a');            //新增 a 標籤
+        let href              = document.createAttribute('href');       //a 設置 href 屬性
+        href.value            = hrefURL;
+        a.setAttributeNode(href);                                       //將 href 屬性加入至 a 元素
+        
+        a.appendChild(img);                                             //a 新增 img 子節點 
         
         let bigDiv            = document.createElement('div');          //新增 div 標籤      
         bigDiv.classList.add('cards');                                  //div 設置 class 屬性      
@@ -77,12 +91,13 @@ async function getSight(page, keyword = null){
         picId.value           = id;
         bigDiv.setAttributeNode(picId);
 
-        bigDiv.appendChild(img);                                        //大div 新增 img、div 子節點
+        bigDiv.appendChild(a);                                          //大div 新增 a、p、div 子節點   
         bigDiv.appendChild(capUp);
         bigDiv.appendChild(div);
-        
+
         let section           = document.querySelector('.images');      //取得 section 父節點位置
         section.appendChild(bigDiv);                                    //section 新增 大div 子節點
+        console.log(section);
         
     });
 

@@ -14,6 +14,7 @@ header{
     justify-content: center;
     align-items: center;
     background-color: #FFFFFF;
+    box-shadow: 0 0 5px 0.5px rgb(107,107,107);
 
     /*step 1 整個 header 移動時固定在上方 => Sticky Header*/
     position: sticky; 
@@ -68,7 +69,7 @@ main{
         margin-bottom: 55px;
         position: relative;
         // outline: 1px solid red;
-        div#textContent{
+        div#textContent{         //[待] 螢幕尺寸拉縮過程中區塊會彈跳
             width: 75rem;
             display: flex; 
             align-items: center;
@@ -142,7 +143,7 @@ main{
         }
         
         div.backgroundImage{
-            width: 40%;             //modify (1)
+            width: 40%;             
             position: relative; 
             z-index: 1;
             align-self: flex-end;
@@ -153,7 +154,7 @@ main{
             text-align: right;
             
             // outline: 1px solid orangered;
-            img{
+            img{                            //[待] 桌機尺寸略小須改進
                 max-width: 100%;
                 height: 16.6vw;
                 vertical-align: -5px;
@@ -213,6 +214,7 @@ main{
                 border-radius: 0 0 5px 5px;
                 border-style: none solid solid solid;
                 // outline: 1px solid purple;
+                text-decoration:none;
             }
         }
     }

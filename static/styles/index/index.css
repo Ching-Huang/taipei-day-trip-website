@@ -24,6 +24,8 @@ header {
       -ms-flex-align: center;
           align-items: center;
   background-color: #FFFFFF;
+  -webkit-box-shadow: 0 0 5px 0.5px #6b6b6b;
+          box-shadow: 0 0 5px 0.5px #6b6b6b;
   /*step 1 整個 header 移動時固定在上方 => Sticky Header*/
   position: -webkit-sticky;
   position: sticky;
@@ -297,6 +299,7 @@ main section.images div.cards div.capDown {
           justify-content: space-between;
   border-radius: 0 0 5px 5px;
   border-style: none solid solid solid;
+  text-decoration: none;
 }
 
 footer {
@@ -615,4 +618,4 @@ footer p {
             justify-content: center;
   }
 }
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=index.css.map */
