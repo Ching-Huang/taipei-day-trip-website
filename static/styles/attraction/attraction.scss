@@ -396,6 +396,24 @@ footer{
         }
     } 
 }
+@media screen and (max-width: 453px){
+    main{
+        section.imgAndOrder{
+            form#orderBox{
+                div.orderBrief{
+                    p{
+                        margin-bottom: 15px;
+                    }
+                    .orderList{
+                        button{
+                            margin-bottom: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 @media screen and (max-width: 420px){
     header{
         nav{

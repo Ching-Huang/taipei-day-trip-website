@@ -2,6 +2,13 @@ console.clear();
 
 console.log('== Start attraction.js  ==');
 
+/* 開始預訂行程 按鈕 取消預設 => (方便切版、測量) */
+// let button = document.querySelector('.orderList button');
+// console.log(button);
+// button.addEventListener('click', function(e){
+//     e.preventDefault();
+// })
+
 let imagesList         = null;
 let currentIndex       = 0;
 
