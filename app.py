@@ -249,7 +249,7 @@ def api_attraction_id(id):
 	# 若景點編號錯誤 則回傳 400
     if SearchResult == None:
         Response = {"error": 'true', "message": '景點編號不正確'}
-        return json.dumps(Response,  ensure_ascii = False),400
+        return json.dumps(Response,  ensure_ascii = False), 400
     else:
         Response = Build_Resp_SightDataJSONById(SearchResult)            
         return Response
@@ -257,7 +257,7 @@ def api_attraction_id(id):
 # 處理 伺服器內部錯誤 500 
 @app.errorhandler(500) 
 def handle_500():
-    Response = {"error": True, "message": '伺服器內部錯誤'}
+    Response = {"error": 'true', "message": '伺服器內部錯誤'}
     return make_response(jsonify(Response), 500)
 
 app.run(port=3000, debug=True) 

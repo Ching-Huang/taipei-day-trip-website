@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="ShiuanChing Huang"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index,follow"> 
+    <meta name="rating" content="General">
+    <base target="_self">
+    <meta name="description" content="台北一日遊的特定景點和訂購行程等資訊"> 
+    <title>台北一日遊</title>
+    <!-- <link rel="stylesheet" href="./styles/attraction/attraction.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='./styles/attraction/attraction.css') }}">
+</head>
+<body>
+    <!-- header -->
+    <header>
+        <nav>
+            <h2>台北一日遊</h2>
+
+            <ul>
+                <li><a href="#">預定行程</a></li>
+                <li><a href="#">登入/註冊</a></li>
+            </ul>
+        </nav>   
+    </header>
+
+    <!-- main -->
+    <main>
+        <section class="imgAndOrder">
+            <div class="slideshowContainer">
+                <div class="sightImg"></div>
+
+                <a class="previousArrow" onclick="previousPage()"></a>
+                <a class="nextArrow" onclick="nextPage()"></a>
+
+                <ul class="pageDots">
+                    <!-- <li class="pageDot" onclick="ChangeImage(0)"></li>
+                    <li class="pageDot" onclick="ChangeImage(1)"></li>
+                    <li class="pageDot" onclick="ChangeImage(2)"></li> -->
+                </ul>            
+            </div> 
+
+            <form id="orderBox">
+                <h2>name</h2>
+
+                <div class="sightData">
+                    <p class="mrt">mrt</p>
+                    <p>at</p>
+                    <p class="category">category</p>
+                </div>
+
+                <div class="orderBrief">
+                    <h4>訂購導覽行程</h4>
+
+                    <p>以此景點為中心的一日行程，帶您探索城市角落故事</p>
+
+                    <ul class="orderList">
+                        <li class="date">
+                            <h4>選擇日期 :&nbsp;&nbsp;</h4>
+                            
+                            <input type="date" name="date" id="date">                      
+                        </li>
+
+                        <!-- 方法 : label包input，i為單選核取方塊(處理CSS => 顏色變化)，input為字(處理CSS => 重疊i、透明化、z-index) -->
+                        <li class="time">
+                            <h4>選擇時間 :&nbsp;&nbsp;</h4>
+                            
+                            <label class="forenoon">
+                                <input type="radio" onclick="showPrice('forenoon')" name="time" value="上半天" checked>&nbsp;上半天
+                                <i class="radioAppearance" id="forenoonRadio"></i>
+                            </label> 
+                            
+                            <pre>&nbsp;&nbsp;</pre>
+                            
+                            <label class="afternoon">
+                                <input type="radio" onclick="showPrice('afternoon')" name="time" value="下半天">&nbsp;下半天
+                                <i class="radioAppearance" id="afternoonRadio"></i>
+                            </label>
+                        </li>
+
+                        <li class="fee">  
+                            <h4>導覽費用 :&nbsp;&nbsp;</h4>
+                            <p class="forenoonFee" name="fee" value="新台幣 2000 元">新台幣 2000 元</p>
+                            <p class="afternoonFee" name="fee" value="新台幣 2500 元" hidden="true">新台幣 2500 元</p>
+                        </li>
+
+                        <button type="submit">開始預訂行程</button>
+                    </ul>   
+                </div>
+            </form>
+        </section> 
+
+        <hr>
+
+        <section class="text">
+            <article class="description">
+                <p>description</p>
+            </article>
+
+            <article class="address">
+                <h4>景點地址 :</h4>
+                <p>address</p>
+            </article>
+
+            <article class="transport">
+                <h4>交通方式 :</h4>
+                <p>transport</p>
+            </article>
+        </section>
+    </main>
+
+    <!-- footer -->
+    <footer>
+        <p><span>COPYRIGHT &copy; </span>台北一日遊</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='./js/attraction.js') }}"></script>
+</body>
+</html>

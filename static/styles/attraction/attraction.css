@@ -1,0 +1,508 @@
+@charset "UTF-8";
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-size: 1rem;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+h2, h4, p, input, label {
+  color: #666666;
+}
+
+header {
+  width: 100%;
+  min-height: 54px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 0 0 5px 0.5px #6b6b6b;
+          box-shadow: 0 0 5px 0.5px #6b6b6b;
+  /*step 1 整個 header 移動時固定在上方 => Sticky Header*/
+  position: -webkit-sticky;
+  position: sticky;
+  /*step 2*/
+  top: 0;
+  /*step 3 設定最大數值，確保在整個網頁的最上面*/
+  z-index: 1000;
+}
+
+header nav {
+  width: 75rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header nav h2 {
+  color: #448899;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 100px;
+          flex: 1 1 100px;
+}
+
+header nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-flex: 3;
+      -ms-flex: 3 1 100px;
+          flex: 3 1 100px;
+  list-style-type: none;
+  width: 70%;
+}
+
+header nav ul li {
+  width: 12%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #666666;
+}
+
+main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 37px;
+}
+
+main section.imgAndOrder {
+  width: 75rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+main section.imgAndOrder div.slideshowContainer {
+  width: 33.75rem;
+  height: 25.375rem;
+  margin-right: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+
+main section.imgAndOrder div.slideshowContainer div.sightImg {
+  width: 33.75rem;
+  height: 25.375rem;
+  background-size: cover;
+  position: absolute;
+  z-index: -1000;
+}
+
+main section.imgAndOrder div.slideshowContainer .previousArrow, main section.imgAndOrder div.slideshowContainer .nextArrow {
+  width: 36px;
+  height: 36px;
+  opacity: 0.8;
+}
+
+main section.imgAndOrder div.slideshowContainer .previousArrow {
+  background-image: url(../../img/Button/btn_leftArrow.png);
+  margin-left: 10px;
+}
+
+main section.imgAndOrder div.slideshowContainer .nextArrow {
+  background-image: url(../../img/Button/btn_rightArrow.png);
+  margin-right: 10px;
+}
+
+main section.imgAndOrder div.slideshowContainer ul.pageDots {
+  list-style-type: none;
+  width: auto;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  margin-bottom: 13px;
+  z-index: 5;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main section.imgAndOrder div.slideshowContainer ul.pageDots .pageDot {
+  width: 6px;
+  height: 6px;
+  margin: 5px;
+  border: 6px solid #FFFFFF;
+  -webkit-box-shadow: 0 0 0 2px #FFFFFF;
+          box-shadow: 0 0 0 2px #FFFFFF;
+  opacity: 0.8;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+main section.imgAndOrder div.slideshowContainer ul.pageDots .pageDot:first-child {
+  border: 6px solid #000000;
+}
+
+main section.imgAndOrder div.slideshowContainer ul.pageDots .active {
+  border: 6px solid #000000;
+}
+
+main section.imgAndOrder form#orderBox {
+  width: 37.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+main section.imgAndOrder form#orderBox div.sightData {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+main section.imgAndOrder form#orderBox div.sightData p {
+  display: inline-block;
+}
+
+main section.imgAndOrder form#orderBox div.orderBrief {
+  width: 37.5rem;
+  height: 18.875rem;
+  background-color: #E8E8E8;
+  border-radius: 5px;
+  padding: 15px 20px;
+}
+
+main section.imgAndOrder form#orderBox div.orderBrief p {
+  margin-top: 15px;
+  margin-bottom: 24px;
+}
+
+main section.imgAndOrder form#orderBox div.orderBrief ul.orderList {
+  list-style-type: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+main section.imgAndOrder form#orderBox div.orderBrief ul.orderList li.date {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+main section.imgAndOrder form#orderBox div.orderBrief ul.orderList li.date h4 {
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+main section.imgAndOrder form#orderBox div.orderBrief ul.orderList li.date input[type="date"] {
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+  width: 193px;
+  height: 35px;
+}
+
+main section.imgAndOrder form#orderBox div.orderBrief ul.orderList li.time {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 19px;
+  margin-bottom: 15px;
+}
+
+main section.imgAndOrder form#orderBox div.orderBrief ul.orderList li.time label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+
+main section.imgAndOrder form#orderBox div.orderBrief ul.orderList li.time label input[type="radio"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  position: relative;
+  z-index: 5;
+  opacity: 0;
+}
+
+main section.imgAndOrder form#orderBox div.orderBrief ul.orderList li.time label .radioAppearance {
+  width: 18px;
+  height: 18px;
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 0 0 0 2px #FFFFFF;
+          box-shadow: 0 0 0 2px #FFFFFF;
+  border-radius: 50%;
+  position: absolute;
+}
+
+main section.imgAndOrder form#orderBox div.orderBrief ul.orderList li.time label #forenoonRadio {
+  background-color: #448899;
+}
+
+main section.imgAndOrder form#orderBox div.orderBrief ul.orderList li.fee {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 21px;
+}
+
+main section.imgAndOrder form#orderBox div.orderBrief ul.orderList li.fee p {
+  margin-top: 0;
+}
+
+main section.imgAndOrder form#orderBox div.orderBrief ul.orderList button {
+  width: 154px;
+  height: 36px;
+  line-height: 11px;
+  font-size: 19px;
+  color: #FFFFFF;
+  background-color: #448899;
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin-top: 25px;
+}
+
+main hr {
+  width: 75rem;
+  color: #E8E8E8;
+  opacity: 0.3;
+  margin-top: 37px;
+  margin-bottom: 50px;
+}
+
+main section.text {
+  width: 75rem;
+}
+
+main section.text article.address {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+main section.text article.description p, main section.text article.address p, main section.text article.transport p {
+  text-align: justify;
+  line-height: 1.5;
+}
+
+footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #757575;
+  min-height: 104px;
+  margin-top: 120px;
+}
+
+footer p {
+  color: #FFFFFF;
+  margin: auto;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 1280px) {
+  header nav {
+    width: 90%;
+  }
+  header nav ul li {
+    width: 14%;
+  }
+  main section.imgAndOrder {
+    width: 90%;
+  }
+  main section.imgAndOrder div.slideshowContainer {
+    width: 45%;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+  }
+  main section.imgAndOrder div.slideshowContainer div.sightImg {
+    width: 100%;
+  }
+  main section.imgAndOrder form#orderBox {
+    width: 45%;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+  }
+  main section.imgAndOrder form#orderBox div.orderBrief {
+    width: 100%;
+  }
+  main hr {
+    width: 90%;
+  }
+  main section.text {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 912px) {
+  header nav ul li {
+    width: 18%;
+  }
+  main section.imgAndOrder div.slideshowContainer {
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+    -webkit-box-flex: 0;
+        -ms-flex-positive: 0;
+            flex-grow: 0;
+    width: 25rem;
+    height: 17.5rem;
+  }
+  main section.imgAndOrder div.slideshowContainer div.sightImg {
+    width: 25rem;
+    height: 17.5rem;
+  }
+}
+
+@media screen and (max-width: 868px) {
+  main section.imgAndOrder div.slideshowContainer {
+    margin: auto;
+    width: 33.75rem;
+    height: 23.75rem;
+    margin-bottom: 20px;
+  }
+  main section.imgAndOrder div.slideshowContainer div.sightImg {
+    width: 33.75rem;
+    height: 23.75rem;
+  }
+  main section.imgAndOrder form#orderBox {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
+@media screen and (max-width: 666px) {
+  header nav ul li {
+    width: 28%;
+  }
+  main section.imgAndOrder div.slideshowContainer {
+    width: 27rem;
+    height: 19rem;
+  }
+  main section.imgAndOrder div.slideshowContainer div.sightImg {
+    width: 27rem;
+    height: 19rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  header nav ul li {
+    width: 38%;
+  }
+  main section.imgAndOrder div.slideshowContainer {
+    width: 23.625rem;
+    height: 16.625rem;
+  }
+  main section.imgAndOrder div.slideshowContainer div.sightImg {
+    width: 23.625rem;
+    height: 16.625rem;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  header nav ul li {
+    width: 44%;
+  }
+  main section.imgAndOrder div.slideshowContainer {
+    width: 20.25rem;
+    height: 14.25rem;
+  }
+  main section.imgAndOrder div.slideshowContainer div.sightImg {
+    width: 20.25rem;
+    height: 14.25rem;
+  }
+}
+
+@media screen and (max-width: 393px) {
+  header nav ul li {
+    width: 48%;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  main section.imgAndOrder {
+    width: 100%;
+    margin-bottom: 3px;
+  }
+  main section.imgAndOrder div.slideshowContainer {
+    width: 23.125rem;
+    height: 21.875rem;
+  }
+  main section.imgAndOrder div.slideshowContainer div.sightImg {
+    width: 23.125rem;
+    height: 21.875rem;
+  }
+  main section.imgAndOrder form#orderBox {
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
+    margin: 0 10px;
+  }
+}
+/*# sourceMappingURL=attraction.css.map */
