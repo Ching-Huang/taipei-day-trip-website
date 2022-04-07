@@ -332,7 +332,113 @@ def api_attraction_id(id):
     else:
         Response = Build_Resp_SightDataJSONById(SearchResult)            
         return Response
-	
+
+#  [路由api] 註冊帳號
+@Travel_Api.route('/user', methods=['POST'])
+def sign_up():
+    print('[DBG][sign_up]')    
+    
+    # 取得前端送來的 Request Body 請求資料  
+    RequestBody     = request.json    
+
+    # 讀取 新註冊會員的 姓名、email、密碼
+    SignUpName      = RequestBody['name']      
+    SignUpEmail     = RequestBody['email']     
+    SignUpPwd       = RequestBody['password']    
+    
+    print('[DBG] Name     = ',SignUpName)
+    print('[DBG] Email    = ',SignUpEmail)
+    print('[DBG] Password = ',SignUpPwd)    
+    
+    # 搜尋 member 資料表中是否有此會員
+    SearchResult = SearchMemberByEmail(SignUpEmail)
+    
+    # 若無此會員，則新增資料到 member 資料表 => 註冊成功
+    if SearchResult == None:
+        AddNewMemberToDB(SignUpName, SignUpEmail, SignUpPwd)
+        
+        Response = {"ok": 'true'}
+        return json.dumps(Response, ensure_ascii = False)   
+
+    # 若有此Email，則不新增資料 => 註冊失敗
+    else:
+        Response = {"error": 'true', "message": '此Email已被註冊'}
+        return json.dumps(Response, ensure_ascii = False), 400  
+
+# [路由api] 登入帳號
+@Travel_Api.route('/user', methods=['PATCH'])
+def sign_in():
+    print('[DBG][sign_in]')
+
+    # 取得前端送來的 Request Body 請求資料
+    RequestBody = request.json
+
+    # 讀取 登入會員的 email、密碼
+    SignInEmail = RequestBody['email']
+    SignInPwd   = RequestBody['password']
+
+    print('[DBG]Email    =', SignInEmail)
+    print('[DBG]Password =', SignInPwd)
+
+    # 透過資料庫驗證 email、密碼 是否正確
+    SearchResult = VerifyLogin(SignInEmail, SignInPwd)
+
+    print('[DBG] SearchResult', SearchResult)
+
+    # 驗證成功
+    if SearchResult != None:
+
+       # 紀錄 目前登入使用者 id、name、email 至 session 中 
+        id       = SearchResult[0]
+        name     = SearchResult[1]
+        email    = SearchResult[3]
+        SetSession(id, name, email)
+
+        Response = {"ok": 'true'}
+        return json.dumps(Response,  ensure_ascii = False)  
+
+    # 驗證失敗
+    else:
+
+        Response = {"error": 'true', "message": 'Email或密碼，輸入錯誤'}
+        return json.dumps(Response, ensure_ascii = False), 400   
+    
+# [路由api] 登出帳號
+@Travel_Api.route('/user', methods=['DELETE'])
+def sign_out():
+
+    print('[DBG][sign_out]')
+
+    # 清除 session 資料    
+    ClearSession()
+
+    Response = {"ok": 'true'}
+    return json.dumps(Response, ensure_ascii = False)
+
+# [路由api] 查詢帳號
+@Travel_Api.route('/user', methods=['GET'])
+def sign_state():
+
+    print('[DBG][sign_state]')
+
+    # 查詢 session 中使用者登入、登出的狀態
+    state = GetSessionState()
+
+    # 若已登入，則回傳 使用者資訊(依照api)
+    if session['state'] == 'Log_in':
+
+        Response ={
+                    "data": {
+                        "id"   : session['id'],
+                        "name" : session['name'],
+                        "email": session['email'] 
+                    }
+                  }
+    else:
+        Response = {"data": None}
+    
+    return json.dumps(Response, ensure_ascii = False)
+
 # 處理 伺服器內部錯誤 500 
 @Travel_Api.errorhandler(500) 
 def handle_500():

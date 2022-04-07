@@ -18,6 +18,56 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='./styles/index/index.css') }}">
 </head>
 <body>
+    <!-- 登入會員帳號 -->
+    <section class="shadow"></section>
+
+    <section class="login">
+        <div class="topColorBox"></div>
+
+        <div class="loginData">
+            <div class="loginDataTitle">
+                <h2>登入會員帳號</h2>
+                <img src="../static/img/icon_close.png" onclick="change('close')" alt="刪除登入會員帳號對話方塊">
+            </div>
+
+            <input type="email" id="loginEmail" placeholder="輸入電子信箱">
+
+            <input type="password" id="loginPwd" placeholder="輸入密碼">
+
+            <button type="button" onclick="login()" class="loginBtn">登入帳戶</button>
+
+            <p id="loginError">失敗訊息</p>
+
+            <p class="registerWarning"><a onclick="change('register')">還沒有帳戶？點此註冊</a></p>
+        </div>
+    </section>
+
+    <!-- 註冊會員帳號 -->
+    <section class="register">
+        <div class="topColorBox"></div>
+
+        <div class="registerData">
+            <div class="registerDataTitle">
+                <h2>註冊會員帳號</h2>
+                <img src="../static/img/icon_close.png" onclick="change('close')" alt="刪除註冊會員帳號對話方塊">
+            </div>
+
+            <input type="text" id="registerName" placeholder="輸入姓名">
+
+            <input type="email" id="registerEmail" placeholder="輸入電子信箱">
+
+            <input type="password" id="registerPwd" placeholder="輸入密碼">
+
+            <button type="button" class="registerBtn" onclick="register()">註冊新帳戶</button>
+
+            <p id="registerError">失敗訊息</p>
+
+            <p id="registerSuccess">註冊成功，請登入系統</p>
+
+            <p class="loginWarning"><a onclick="change('login')">已經有帳戶了？點此登入</a></p>
+        </div>
+    </section>
+
     <!-- header -->
     <header>
         <nav>
@@ -25,7 +75,7 @@
 
             <ul>
                 <li><a href="#">預定行程</a></li>
-                <li><a href="#">登入/註冊</a></li>
+                <li><a href="#" class="stateSwitch" onclick="change('login')">登入/註冊</a></li>
             </ul>
         </nav>   
     </header>
