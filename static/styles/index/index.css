@@ -349,6 +349,7 @@ header nav ul li {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  cursor: pointer;
 }
 
 header nav ul li a {
