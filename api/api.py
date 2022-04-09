@@ -445,4 +445,3 @@ def handle_500():
     Response = {"error": 'true', "message": '伺服器內部錯誤'}
     return make_response(jsonify(Response), 500)
 
-# app.run(port=3000, debug=True) 

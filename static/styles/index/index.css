@@ -142,7 +142,6 @@ section.login div.loginData p#loginError {
   text-align: center;
   color: #ff0000;
   display: none;
-  outline: 1px solid blue;
 }
 
 section.login div.loginData p.registerWarning {
