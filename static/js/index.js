@@ -208,10 +208,12 @@ async function initial(){
     let searchBtn = document.querySelector('.searchBtn'); 
 
     // 搜尋按鈕 綁監聽，點擊按鈕後執行，查詢景點名稱  
-    searchBtn.addEventListener('click', searchBtnCallback)
+    searchBtn.addEventListener('click', searchBtnCallback);
 
 }
 
 // 等待網頁完全讀取完畢 
 window.addEventListener('load', initial);
+
+
 

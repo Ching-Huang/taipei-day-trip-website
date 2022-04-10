@@ -15,6 +15,274 @@ h2, h4, p, input, label {
   color: #666666;
 }
 
+/* 登入會員帳號 */
+section.shadow {
+  position: fixed;
+  z-index: 1999;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0.25;
+  display: none;
+}
+
+section.login {
+  position: fixed;
+  z-index: 2000;
+  top: 30%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 340px;
+  border-radius: 5px;
+  background: #FFFFFF;
+  -webkit-box-shadow: 0px 4px 60px #AAAAAA;
+          box-shadow: 0px 4px 60px #AAAAAA;
+  display: none;
+}
+
+section.login div.topColorBox {
+  height: 10px;
+  border-radius: 6px 6px 0px 0px;
+  background: -webkit-gradient(linear, right top, left top, from(#337788), to(#66AABB));
+  background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+}
+
+section.login div.loginData {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+section.login div.loginData div.loginDataTitle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 15px 15px 10px 15px;
+  position: relative;
+}
+
+section.login div.loginData div.loginDataTitle h2 {
+  width: 310px;
+  text-align: center;
+}
+
+section.login div.loginData div.loginDataTitle img {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 100;
+  width: 16px;
+  height: 16px;
+}
+
+section.login div.loginData input {
+  width: 310px;
+  height: 47px;
+  line-height: normal;
+  font-size: 1.25rem;
+  margin: 5px 15px;
+  padding: 15px;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+}
+
+section.login div.loginData input::-webkit-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.login div.loginData input:-ms-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.login div.loginData input::-ms-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.login div.loginData input::placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.login div.loginData input#loginPwd {
+  margin-top: 5px;
+}
+
+section.login div.loginData .loginBtn {
+  width: 310px;
+  height: 47px;
+  color: #FFFFFF;
+  background: #448899;
+  border: 0;
+  outline: none;
+  border-radius: 5px;
+  font-size: 19px;
+  margin: 5px 15px;
+}
+
+section.login div.loginData p#loginError {
+  width: 310px;
+  height: 47px;
+  line-height: 47px;
+  margin: 0 auto;
+  text-align: center;
+  color: #ff0000;
+  display: none;
+}
+
+section.login div.loginData p.registerWarning {
+  margin: 5px 15px 15px 15px;
+  text-align: center;
+}
+
+section.login div.loginData p.registerWarning a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 註冊會員帳號 */
+section.register {
+  position: fixed;
+  z-index: 2000;
+  top: 30%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 340px;
+  border-radius: 5px;
+  background: #FFFFFF;
+  -webkit-box-shadow: 0px 4px 60px #AAAAAA;
+          box-shadow: 0px 4px 60px #AAAAAA;
+  display: none;
+}
+
+section.register div.topColorBox {
+  height: 10px;
+  border-radius: 6px 6px 0px 0px;
+  background: -webkit-gradient(linear, right top, left top, from(#337788), to(#66AABB));
+  background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+}
+
+section.register div.registerData {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+section.register div.registerData div.registerDataTitle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 15px 15px 10px 15px;
+  position: relative;
+}
+
+section.register div.registerData div.registerDataTitle h2 {
+  width: 310px;
+  text-align: center;
+}
+
+section.register div.registerData div.registerDataTitle img {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 100;
+  width: 16px;
+  height: 16px;
+}
+
+section.register div.registerData input {
+  width: 310px;
+  height: 47px;
+  line-height: normal;
+  font-size: 1.25rem;
+  margin: 5px 15px;
+  padding: 15px;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+}
+
+section.register div.registerData input#registerPwd {
+  margin-top: 5px;
+}
+
+section.register div.registerData ::-webkit-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.register div.registerData :-ms-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.register div.registerData ::-ms-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.register div.registerData ::placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.register div.registerData .registerBtn {
+  width: 310px;
+  height: 47px;
+  color: #FFFFFF;
+  background: #448899;
+  border: 0;
+  outline: none;
+  border-radius: 5px;
+  font-size: 19px;
+  margin: 5px 15px;
+}
+
+section.register div.registerData p#registerError, section.register div.registerData p#registerSuccess {
+  width: 310px;
+  height: 47px;
+  line-height: 47px;
+  margin: 0 auto;
+  text-align: center;
+  color: #ff0000;
+  display: none;
+}
+
+section.register div.registerData p.loginWarning {
+  margin: 5px 15px 15px 15px;
+  text-align: center;
+}
+
+section.register div.registerData p.loginWarning a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 header {
   width: 100%;
   min-height: 54px;
@@ -81,6 +349,7 @@ header nav ul li {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  cursor: pointer;
 }
 
 header nav ul li a {
@@ -134,6 +403,7 @@ main section.imgAndOrder div.slideshowContainer {
 main section.imgAndOrder div.slideshowContainer div.sightImg {
   width: 33.75rem;
   height: 25.375rem;
+  border-radius: 5px;
   background-size: cover;
   position: absolute;
   z-index: -1000;

@@ -7,6 +7,212 @@ html{
     font-size: 1rem;
     font-family: 'Noto Sans TC', sans-serif;
 }
+h2, h4, p, input, label{   
+    color: #666666;
+}
+
+/* 登入會員帳號 */
+section.shadow{
+    position: fixed;
+    z-index: 1999;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0.25;
+    display: none;   
+}
+section.login{
+    position: fixed;
+    z-index: 2000;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 340px;
+    border-radius: 5px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 60px #AAAAAA;
+    display: none;
+    // outline: 1px solid red;
+    div.topColorBox{
+        height: 10px;
+        border-radius: 6px 6px 0px 0px;
+        background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+        // outline: 1px solid blue;
+    }
+    div.loginData{
+        display: flex;
+        flex-direction: column;
+        // outline: 1px solid green;
+        div.loginDataTitle{
+            display: flex;
+            align-items: center;
+            margin: 15px 15px 10px 15px;
+            position: relative;
+            // outline: 1px solid red;
+            h2{
+                width: 310px;
+                text-align: center;
+                // outline: 1px solid green;
+            }
+            img{
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                z-index: 100;
+                width: 16px;
+                height: 16px;
+                // outline: 1px solid blue;
+            }
+        }
+        input{
+            width: 310px;
+            height: 47px;
+            line-height: normal;
+            font-size: 1.25rem;
+            margin: 5px 15px;
+            padding: 15px;
+            border: 1px solid #CCCCCC;
+            border-radius: 5px;
+            // outline: 1px solid green; 
+        }
+        input::placeholder{
+            font-size: 1rem;  
+            font-weight: 800;           
+            color: #757575;
+            // outline: 1px solid red;    
+        }
+        input#loginPwd{
+            margin-top: 5px;
+        }
+        .loginBtn{
+            width: 310px;
+            height: 47px;
+            color: #FFFFFF;
+            background: #448899;
+            border:0;
+            outline:none;
+            border-radius: 5px;
+            font-size: 19px;
+            margin: 5px 15px;
+        }
+        p#loginError{
+            width: 310px;
+            height: 47px;
+            line-height: 47px;
+            margin: 0 auto;
+            text-align: center;
+            color: #ff0000;
+            display: none;
+            // outline: 1px solid blue;
+        }
+        p.registerWarning{
+            margin: 5px 15px 15px 15px;
+            text-align: center;
+            // outline: 1px solid blue;
+            a{
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+/* 註冊會員帳號 */
+section.register{
+    position: fixed;
+    z-index: 2000;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 340px;
+    border-radius: 5px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 60px #AAAAAA;
+    display: none;
+    // outline: 1px solid red;
+    div.topColorBox{
+        height: 10px;
+        border-radius: 6px 6px 0px 0px;
+        background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+        // outline: 1px solid blue;
+    }
+    div.registerData{
+        display: flex;
+        flex-direction: column;
+        // outline: 1px solid green;
+        div.registerDataTitle{
+            display: flex;
+            align-items: center;
+            margin: 15px 15px 10px 15px;
+            position: relative;
+            // outline: 1px solid red;
+            h2{
+                width: 310px;
+                text-align: center;
+                // outline: 1px solid green;
+            }
+            img{
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                z-index: 100;
+                width: 16px;
+                height: 16px;
+                // outline: 1px solid blue;
+            }
+        }
+        input{
+            width: 310px;
+            height: 47px;
+            line-height: normal;
+            font-size: 1.25rem;
+            margin: 5px 15px;
+            padding: 15px;
+            border: 1px solid #CCCCCC;
+            border-radius: 5px;
+            // outline: 1px solid green;    
+        }
+        input#registerPwd{
+            margin-top: 5px;
+        }
+        ::placeholder{
+            font-size: 1rem;
+            font-weight: 800;            
+            color: #757575;
+            // outline: 1px solid red;     
+        }
+        .registerBtn{
+            width: 310px;
+            height: 47px;
+            color: #FFFFFF;
+            background: #448899;
+            border:0;
+            outline:none;
+            border-radius: 5px;
+            font-size: 19px;
+            margin: 5px 15px;
+        }
+        p#registerError, p#registerSuccess{
+            width: 310px;
+            height: 47px;
+            line-height: 47px;
+            margin: 0 auto;
+            text-align: center;
+            color: #ff0000;
+            display: none;
+            // outline: 1px solid blue;
+        }
+        p.loginWarning{
+            margin: 5px 15px 15px 15px;
+            text-align: center;
+            // outline: 1px solid blue;
+            a{
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+    }
+}
 header{
     width: 100%;
     min-height: 54px;
@@ -45,6 +251,7 @@ header{
                 width: 12%;
                 display: flex;
                 justify-content: flex-end;
+                cursor: pointer;
                 // outline: 1px solid red;
                 a{
                     text-decoration: none;
