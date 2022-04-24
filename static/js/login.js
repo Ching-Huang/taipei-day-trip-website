@@ -228,6 +228,33 @@ function getLoginStatus(){
     }); 
 }
 
+function booking(){
+
+    let apiUrl = '/api/user';
+
+    fetch(apiUrl, 
+        {
+            method : 'GET',
+            headers: {'Content-Type': 'application/json;'}
+        }
+    )
+    .then(res => {
+        return res.json();
+    }).then(result => {
+
+        // 若已登入，則跳轉至預定行程頁面 booking 
+        if(result.data !== null){
+
+            window.location.href = "/booking";
+        }
+        // 若尚未登入，則打開 登入 用的跳出式視窗，執行 登入流程。
+        else if(result.data === null){
+
+            change('login');
+        }
+    });
+}   
+
 /* 檢查會員登入狀態 */
 function loadDoneCallback(){     
     

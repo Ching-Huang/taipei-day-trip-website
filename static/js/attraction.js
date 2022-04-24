@@ -2,13 +2,6 @@ console.clear();
 
 console.log('== Start attraction.js  ==');
 
-/* 開始預訂行程 按鈕 取消預設 => (方便切版、測量) */
-// let button = document.querySelector('.orderList button');
-// console.log(button);
-// button.addEventListener('click', function(e){
-//     e.preventDefault();
-// })
-
 let imagesList         = null;
 let currentIndex       = 0;
 
@@ -82,7 +75,7 @@ async function loadDoneCallBack(){
     renderSightData(Result.data);
 
     /* 自動輪播效果 */
-    window.setInterval(imageAutoNext, 5000); // 每五秒   
+    // window.setInterval(imageAutoNext, 5000); // 每五秒   
 }
 
 /* 讀取景點資料並渲染在網頁上 (Part 3-2) */
@@ -203,6 +196,107 @@ function imageAutoNext(){
     currentIndex++;
     changeImage(currentIndex);
 }
+
+/* Part 5 - 4：建立一個預定行程 */ 
+// 開始預定行程 按鈕 Callback
+function startBookingCallback(e){
+
+    // 避免按下按鈕後，網頁自動重新整理
+    e.preventDefault();
+
+    let apiUrl = '/api/user';
+
+    fetch(apiUrl, 
+        {
+            method : 'GET',
+            headers: {'Content-Type': 'application/json;'}
+        }
+    )
+    .then(res => 
+        {
+            return res.json();
+        }    
+    )
+    .then(result => 
+        {
+            // 若已登入，則建立 預約行程，並跳向 預約頁面( /booking )
+            if(result.data !== null){
+
+                createBookingInfo();
+            }
+            // 若尚未登入，則打開 登入 用的跳出式視窗，執行 登入流程。
+            else if(result.data === null){
+
+                change('login');
+            }
+        }
+    );
+}
+
+// 建立行程成功 => 紀錄 景點、日期、時間、價格 等資訊。
+function createBookingInfo(){
+
+    let apiUrl = '/api/booking';
+
+    let attrId      = location.pathname.split('/')[2];                      // 透過網址 path 取得景點 id 編號
+    let dateValue   = document.getElementById('date').value;
+    let timeValue   = document.querySelector('[name=time]:checked').value;  // 取得 forenoon 或 afternoon
+    let priceValue  = document.querySelector('p[hidden=true]');             // 取得 2000     或 2500
+    priceValue = parseInt(priceValue.getAttribute("value"));
+
+    if(priceValue === 2500)
+        priceValue = 2000;
+    else
+        priceValue = 2500;
+
+    // 若無選擇日期，則顯示警語 *請選擇日期 
+    if(dateValue === ''){
+
+        let dateFormWarning = document.querySelector('.dateFormWarning');
+        dateFormWarning.removeAttribute('hidden');        
+        return;
+    }    
+
+    // 呼叫 API => /api/booking [POST] ，建立新的預定行程
+    fetch(apiUrl,
+        {        
+            method  : 'POST',
+            body    :  JSON.stringify({
+
+                'attractionId' : attrId,
+                'date'         : dateValue,
+                'time'         : timeValue,
+                'price'        : priceValue
+
+            }),
+            headers :{ 'Content-Type': 'application/json;'} 
+        }
+    )
+    .then(res => 
+        {
+            return res.json();
+        }
+    ).then( result => {
+
+        // 若建立成功，則跳轉至預定行程頁面( /booking )
+        if(result.ok){
+
+            window.location.href = "/booking";
+        }
+        // 若尚未登入，則打開 登入 用的跳出式視窗，執行 登入流程。
+        else{
+
+            document.querySelector('section.shadow').style.display = "block";
+            document.querySelector('section.login').style.display  = "block";
+            
+        }
+    });
+}
+
+/* 開始預訂行程 按鈕 */
+let startBookingButton = document.getElementById('startBooking');
+
+startBookingButton.addEventListener('click', startBookingCallback);
 
 // 等待網頁完全讀取完畢
 window.addEventListener('load', loadDoneCallBack);
