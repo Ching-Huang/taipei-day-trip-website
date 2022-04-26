@@ -1,0 +1,825 @@
+@charset "UTF-8";
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-size: 1rem;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+h2, h4, p {
+  color: #666666;
+}
+
+hr {
+  width: 75rem;
+  color: #E8E8E8;
+  opacity: 0.3;
+}
+
+/* 登入會員帳號 */
+section.shadow {
+  position: fixed;
+  z-index: 1999;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0.25;
+  display: none;
+}
+
+section.login {
+  position: fixed;
+  z-index: 2000;
+  top: 30%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 340px;
+  border-radius: 5px;
+  background: #FFFFFF;
+  -webkit-box-shadow: 0px 4px 60px #AAAAAA;
+          box-shadow: 0px 4px 60px #AAAAAA;
+  display: none;
+}
+
+section.login div.topColorBox {
+  height: 10px;
+  border-radius: 6px 6px 0px 0px;
+  background: -webkit-gradient(linear, right top, left top, from(#337788), to(#66AABB));
+  background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+}
+
+section.login div.loginData {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+section.login div.loginData div.loginDataTitle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 15px 15px 10px 15px;
+  position: relative;
+}
+
+section.login div.loginData div.loginDataTitle h2 {
+  width: 310px;
+  text-align: center;
+}
+
+section.login div.loginData div.loginDataTitle img {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 100;
+  width: 16px;
+  height: 16px;
+}
+
+section.login div.loginData input {
+  width: 310px;
+  height: 47px;
+  line-height: normal;
+  font-size: 1.25rem;
+  margin: 5px 15px;
+  padding: 15px;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+}
+
+section.login div.loginData input::-webkit-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.login div.loginData input:-ms-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.login div.loginData input::-ms-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.login div.loginData input::placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.login div.loginData input#loginPwd {
+  margin-top: 5px;
+}
+
+section.login div.loginData .loginBtn {
+  width: 310px;
+  height: 47px;
+  color: #FFFFFF;
+  background: #448899;
+  border: 0;
+  outline: none;
+  border-radius: 5px;
+  font-size: 19px;
+  margin: 5px 15px;
+}
+
+section.login div.loginData p#loginError {
+  width: 310px;
+  height: 47px;
+  line-height: 47px;
+  margin: 0 auto;
+  text-align: center;
+  color: #ff0000;
+  display: none;
+}
+
+section.login div.loginData p.registerWarning {
+  margin: 5px 15px 15px 15px;
+  text-align: center;
+}
+
+section.login div.loginData p.registerWarning a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 註冊會員帳號 */
+section.register {
+  position: fixed;
+  z-index: 2000;
+  top: 30%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 340px;
+  border-radius: 5px;
+  background: #FFFFFF;
+  -webkit-box-shadow: 0px 4px 60px #AAAAAA;
+          box-shadow: 0px 4px 60px #AAAAAA;
+  display: none;
+}
+
+section.register div.topColorBox {
+  height: 10px;
+  border-radius: 6px 6px 0px 0px;
+  background: -webkit-gradient(linear, right top, left top, from(#337788), to(#66AABB));
+  background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+}
+
+section.register div.registerData {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+section.register div.registerData div.registerDataTitle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 15px 15px 10px 15px;
+  position: relative;
+}
+
+section.register div.registerData div.registerDataTitle h2 {
+  width: 310px;
+  text-align: center;
+}
+
+section.register div.registerData div.registerDataTitle img {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 100;
+  width: 16px;
+  height: 16px;
+}
+
+section.register div.registerData input {
+  width: 310px;
+  height: 47px;
+  line-height: normal;
+  font-size: 1.25rem;
+  margin: 5px 15px;
+  padding: 15px;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+}
+
+section.register div.registerData input#registerPwd {
+  margin-top: 5px;
+}
+
+section.register div.registerData ::-webkit-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.register div.registerData :-ms-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.register div.registerData ::-ms-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.register div.registerData ::placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.register div.registerData .registerBtn {
+  width: 310px;
+  height: 47px;
+  color: #FFFFFF;
+  background: #448899;
+  border: 0;
+  outline: none;
+  border-radius: 5px;
+  font-size: 19px;
+  margin: 5px 15px;
+}
+
+section.register div.registerData p#registerError, section.register div.registerData p#registerSuccess {
+  width: 310px;
+  height: 47px;
+  line-height: 47px;
+  margin: 0 auto;
+  text-align: center;
+  color: #ff0000;
+  display: none;
+}
+
+section.register div.registerData p.loginWarning {
+  margin: 5px 15px 15px 15px;
+  text-align: center;
+}
+
+section.register div.registerData p.loginWarning a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 頁首 */
+header {
+  width: 100%;
+  min-height: 54px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 0 0 5px 0.5px #6b6b6b;
+          box-shadow: 0 0 5px 0.5px #6b6b6b;
+  /*step 1 整個 header 移動時固定在上方 => Sticky Header*/
+  position: -webkit-sticky;
+  position: sticky;
+  /*step 2*/
+  top: 0;
+  /*step 3 設定最大數值，確保在整個網頁的最上面*/
+  z-index: 1000;
+}
+
+header nav {
+  width: 75rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header nav h2 {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 100px;
+          flex: 1 1 100px;
+}
+
+header nav h2 a {
+  text-decoration: none;
+  color: #448899;
+}
+
+header nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-flex: 3;
+      -ms-flex: 3 1 100px;
+          flex: 3 1 100px;
+  list-style-type: none;
+  width: 70%;
+}
+
+header nav ul li {
+  width: 12%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  cursor: pointer;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #666666;
+}
+
+/* 未預訂、已預訂 會員登入問候語 */
+main#neverOrder section.neverOrder p, main#ordered section.neverOrder p {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 35px;
+}
+
+main#neverOrder section.neverOrder p span, main#ordered section.neverOrder p span {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+main#neverOrder .greeting, main#ordered .greeting {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 35px;
+}
+
+main#neverOrder .greeting span, main#ordered .greeting span {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+/* 未預訂 */
+main#neverOrder {
+  margin-top: 46px;
+  margin-bottom: 40px;
+}
+
+main#neverOrder section.neverOrder {
+  width: 980px;
+  margin: 0 auto;
+}
+
+main#neverOrder section.neverOrder .explain {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* 已預訂 */
+main#ordered {
+  margin-top: 46px;
+  margin-bottom: 62px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main#ordered .greeting {
+  width: 980px;
+}
+
+main#ordered section.ordered, main#ordered section.contact, main#ordered section.payment, main#ordered section.checkOrder {
+  width: 980px;
+}
+
+main#ordered section.ordered ul, main#ordered section.contact ul, main#ordered section.payment ul, main#ordered section.checkOrder ul {
+  list-style-type: none;
+}
+
+main#ordered section.ordered {
+  position: relative;
+}
+
+main#ordered section.ordered .sightImgAndOrderData {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+main#ordered section.ordered .sightImgAndOrderData .sightImg {
+  width: 266px;
+  height: 200px;
+  background-size: cover;
+}
+
+main#ordered section.ordered .sightImgAndOrderData .orderData {
+  margin-left: 22px;
+}
+
+main#ordered section.ordered .sightImgAndOrderData .orderData .title {
+  height: 20px;
+  margin-bottom: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+main#ordered section.ordered .sightImgAndOrderData .orderData .title #TaipeiTrip, main#ordered section.ordered .sightImgAndOrderData .orderData .title #TaipeiSightName {
+  color: #448899;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+main#ordered section.ordered .sightImgAndOrderData .orderData .orderList {
+  height: 140px;
+}
+
+main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .date p, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .time p, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .fee p {
+  margin-bottom: 20px;
+}
+
+main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .date, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .time, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .fee, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .place {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .date p, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .time p, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .fee p, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .place p {
+  height: 20px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .date #tripDate, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .date #tripTime, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .date #tripFee, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .date #tripPlace, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .time #tripDate, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .time #tripTime, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .time #tripFee, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .time #tripPlace, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .fee #tripDate, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .fee #tripTime, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .fee #tripFee, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .fee #tripPlace, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .place #tripDate, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .place #tripTime, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .place #tripFee, main#ordered section.ordered .sightImgAndOrderData .orderData .orderList .place #tripPlace {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+main#ordered section.ordered .sightImgAndOrderData img {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  width: 30px;
+  height: 30px;
+}
+
+main#ordered hr.top, main#ordered hr.center {
+  margin-bottom: 44px;
+}
+
+main#ordered hr.top {
+  margin-top: 40px;
+}
+
+main#ordered section.contact h2 {
+  margin-bottom: 24px;
+}
+
+main#ordered section.contact .contactBook .name, main#ordered section.contact .contactBook .email, main#ordered section.contact .contactBook .phoneNumber {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 15px;
+}
+
+main#ordered section.contact .contactBook .name h4, main#ordered section.contact .contactBook .email h4, main#ordered section.contact .contactBook .phoneNumber h4 {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+main#ordered section.contact .contactBook .name input, main#ordered section.contact .contactBook .email input, main#ordered section.contact .contactBook .phoneNumber input {
+  width: 200px;
+  height: 38px;
+  line-height: normal;
+  font-size: 1rem;
+  border: 1px solid #E8E8E8;
+  border-radius: 5px;
+  padding: 10px;
+  background: #FFFFFF;
+}
+
+main#ordered section.contact .attention {
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+main#ordered hr.center {
+  margin-top: 40px;
+}
+
+main#ordered section.payment h2 {
+  margin-bottom: 24px;
+}
+
+main#ordered section.payment .creditCardData .cardNumber, main#ordered section.payment .creditCardData .expirationDate, main#ordered section.payment .creditCardData .verifyPwd {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 15px;
+}
+
+main#ordered section.payment .creditCardData .cardNumber h4, main#ordered section.payment .creditCardData .expirationDate h4, main#ordered section.payment .creditCardData .verifyPwd h4 {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+main#ordered section.payment .creditCardData .cardNumber input, main#ordered section.payment .creditCardData .expirationDate input, main#ordered section.payment .creditCardData .verifyPwd input {
+  width: 200px;
+  height: 38px;
+  line-height: normal;
+  font-size: 1rem;
+  border: 1px solid #E8E8E8;
+  border-radius: 5px;
+  padding: 10px;
+  background: #FFFFFF;
+}
+
+main#ordered hr.bottom {
+  margin-top: 25px;
+  margin-bottom: 43px;
+}
+
+main#ordered section.checkOrder {
+  width: 980px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+}
+
+main#ordered section.checkOrder div.checkOrderPrice {
+  width: 173px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+main#ordered section.checkOrder div.checkOrderPrice h4 {
+  position: absolute;
+  right: 0;
+}
+
+main#ordered section.checkOrder div.checkOrderPrice button#checkOrder {
+  cursor: pointer;
+  width: 173px;
+  height: 36px;
+  line-height: 11px;
+  background: #448899;
+  color: #FFFFFF;
+  font-size: 19px;
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin-top: 46px;
+}
+
+/* 頁尾 */
+footer {
+  background-color: #757575;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  min-height: 104px;
+}
+
+footer p {
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 45px;
+  text-align: center;
+}
+
+/* 已預訂 */
+@media screen and (max-width: 1280px) {
+  header nav {
+    width: 80%;
+  }
+  header nav ul li {
+    width: 14%;
+  }
+  /* 已預訂 */
+  main#ordered .greeting, main#ordered section.ordered, main#ordered section.contact, main#ordered section.payment, main#ordered section.checkOrder {
+    width: 60%;
+  }
+  main#ordered hr {
+    width: 1024px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  header nav ul li {
+    width: 18%;
+  }
+  main#ordered .greeting {
+    text-align: center;
+  }
+  main#ordered section.ordered, main#ordered section.contact, main#ordered section.payment, main#ordered section.checkOrder {
+    width: 70%;
+  }
+  main#ordered section.ordered .sightImgAndOrderData {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  main#ordered section.ordered .sightImgAndOrderData .sightImg {
+    width: 620px;
+    height: 435px;
+  }
+  main#ordered section.ordered .sightImgAndOrderData .orderData {
+    width: 620px;
+    margin-top: 20px;
+    margin-left: 0px;
+  }
+  main#ordered section.ordered .sightImgAndOrderData .orderData .title {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  main#ordered section.ordered .sightImgAndOrderData img {
+    bottom: 0;
+  }
+  main#ordered hr {
+    width: 819px;
+  }
+}
+
+@media screen and (max-width: 870px) {
+  header nav {
+    width: 90%;
+  }
+  main#ordered section.ordered, main#ordered section.contact, main#ordered section.payment, main#ordered section.checkOrder {
+    width: 90%;
+  }
+  main#ordered hr {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 690px) {
+  header nav {
+    width: 97%;
+  }
+  header nav ul li {
+    width: 22%;
+  }
+  main#ordered section.ordered, main#ordered section.contact, main#ordered section.payment, main#ordered section.checkOrder {
+    width: 94.5%;
+  }
+  main#ordered section.ordered .sightImgAndOrderData .sightImg {
+    width: 500px;
+    height: 350px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  header nav ul li {
+    width: 28%;
+  }
+  main#ordered .greeting {
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  header nav {
+    width: 95%;
+  }
+  header nav ul {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  header nav ul li {
+    width: 80%;
+  }
+  header nav h2 {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 120px;
+            flex: 1 1 120px;
+  }
+  main#ordered section.ordered .sightImgAndOrderData {
+    overflow: hidden;
+  }
+  main#ordered section.ordered .sightImgAndOrderData .sightImg {
+    width: 340px;
+    height: 256px;
+    position: relative;
+    top: -30px;
+  }
+  main#ordered section.ordered .sightImgAndOrderData .orderData {
+    width: 100%;
+    margin-top: 37px;
+    position: relative;
+    top: -30px;
+  }
+  main#ordered section.ordered .sightImgAndOrderData .orderData .title {
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+  main#ordered hr.top {
+    margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  header nav ul li {
+    width: 50%;
+  }
+  header nav h2 {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 120px;
+            flex: 1 1 120px;
+  }
+  main#ordered .greeting {
+    -ms-flex-item-align: start;
+        align-self: flex-start;
+    text-align: left;
+    margin-left: 10px;
+    margin-bottom: 37px;
+  }
+}
+
+/* 未預訂 */
+@media screen and (max-width: 1280px) {
+  main#neverOrder section.neverOrder {
+    width: 80%;
+  }
+  footer p {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  main#neverOrder {
+    padding: 0 10px;
+  }
+  main#neverOrder section.neverOrder {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  main#neverOrder section.neverOrder p {
+    font-size: 16px;
+  }
+}
+/*# sourceMappingURL=booking.css.map */

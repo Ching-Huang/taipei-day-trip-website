@@ -23,7 +23,7 @@
         <div class="loginData">
             <div class="loginDataTitle">
                 <h2>登入會員帳號</h2>
-                <img src="../static/img/icon_close.png" onclick="change('close')" alt="刪除登入會員帳號對話方塊">
+                <img src="../static/img/icon/icon_close.png" onclick="change('close')" alt="刪除登入會員帳號對話方塊">
             </div>
 
             <input type="email" id="loginEmail" placeholder="輸入電子信箱">
@@ -45,7 +45,7 @@
         <div class="registerData">
             <div class="registerDataTitle">
                 <h2>註冊會員帳號</h2>
-                <img src="../static/img/icon_close.png" onclick="change('close')" alt="刪除註冊會員帳號對話方塊">
+                <img src="../static/img/icon/icon_close.png" onclick="change('close')" alt="刪除註冊會員帳號對話方塊">
             </div>
 
             <input type="text" id="registerName" placeholder="輸入姓名">
@@ -67,10 +67,10 @@
     <!-- header -->
     <header>
         <nav>
-            <h2>台北一日遊</h2>
+            <h2><a href="/">台北一日遊</a></h2>
 
             <ul>
-                <li><a href="#">預定行程</a></li>
+                <li><a onclick="booking()">預定行程</a></li>
                 <li><a class="stateSwitch" onclick="change('login')">登入/註冊</a></li>
             </ul>
         </nav>   
@@ -118,25 +118,27 @@
                             <h4>選擇時間 :&nbsp;&nbsp;</h4>
                             
                             <label class="forenoon">
-                                <input type="radio" onclick="showPrice('forenoon')" name="time" value="上半天" checked>&nbsp;上半天
+                                <input type="radio" onclick="showPrice('forenoon')" name="time" value="forenoon" checked>&nbsp;上半天
                                 <i class="radioAppearance" id="forenoonRadio"></i>
                             </label> 
                             
                             <pre>&nbsp;&nbsp;</pre>
                             
                             <label class="afternoon">
-                                <input type="radio" onclick="showPrice('afternoon')" name="time" value="下半天">&nbsp;下半天
+                                <input type="radio" onclick="showPrice('afternoon')" name="time" value="afternoon">&nbsp;下半天
                                 <i class="radioAppearance" id="afternoonRadio"></i>
                             </label>
                         </li>
 
                         <li class="fee">  
                             <h4>導覽費用 :&nbsp;&nbsp;</h4>
-                            <p class="forenoonFee" name="fee" value="新台幣 2000 元">新台幣 2000 元</p>
-                            <p class="afternoonFee" name="fee" value="新台幣 2500 元" hidden="true">新台幣 2500 元</p>
+                            <p class="forenoonFee" name="fee" value="2000">新台幣 2000 元</p>
+                            <p class="afternoonFee" name="fee" value="2500" hidden="true">新台幣 2500 元</p>
                         </li>
 
-                        <button type="submit">開始預訂行程</button>
+                        <li class="dateFormWarning" hidden="true">*請選擇日期</li>
+
+                        <button type="submit" id="startBooking">開始預訂行程</button>
                     </ul>   
                 </div>
             </form>

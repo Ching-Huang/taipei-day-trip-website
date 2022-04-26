@@ -321,10 +321,14 @@ header nav {
 }
 
 header nav h2 {
-  color: #448899;
   -webkit-box-flex: 1;
       -ms-flex: 1 1 100px;
           flex: 1 1 100px;
+}
+
+header nav h2 a {
+  text-decoration: none;
+  color: #448899;
 }
 
 header nav ul {

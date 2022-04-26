@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="ShiuanChing Huang"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index,follow"> 
+    <meta name="rating" content="General">
+    <base target="_self">
+    <meta name="description" content="台北一日遊的特定景點和訂購行程等資訊"> 
+    <title>台北一日遊</title>
+    <!-- google font setting -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./styles/booking/booking.css') }}">
+</head>
+<body>
+    <!-- 登入會員帳號 -->
+    <section class="shadow"></section>
+
+    <section class="login">
+        <div class="topColorBox"></div>
+ 
+        <div class="loginData">
+            <div class="loginDataTitle">
+                <h2>登入會員帳號</h2>
+                <img src="../static/img/icon/icon_close.png" onclick="change('close')" alt="刪除登入會員帳號對話方塊">
+            </div>
+ 
+            <input type="email" id="loginEmail" placeholder="輸入電子信箱">
+ 
+            <input type="password" id="loginPwd" placeholder="輸入密碼">
+ 
+            <button type="button" onclick="login()" class="loginBtn">登入帳戶</button>
+ 
+            <p id="loginError">失敗訊息</p>
+ 
+            <p class="registerWarning"><a onclick="change('register')">還沒有帳戶？點此註冊</a></p>
+        </div>
+    </section>
+ 
+    <!-- 註冊會員帳號 -->
+    <section class="register">
+        <div class="topColorBox"></div>
+ 
+        <div class="registerData">
+            <div class="registerDataTitle">
+                <h2>註冊會員帳號</h2>
+                <img src="../static/img/icon/icon_close.png" onclick="change('close')" alt="刪除註冊會員帳號對話方塊">
+            </div>
+ 
+            <input type="text" id="registerName" placeholder="輸入姓名">
+ 
+            <input type="email" id="registerEmail" placeholder="輸入電子信箱">
+ 
+            <input type="password" id="registerPwd" placeholder="輸入密碼">
+ 
+            <button type="button" class="registerBtn" onclick="register()">註冊新帳戶</button>
+ 
+            <p id="registerError">失敗訊息</p>
+ 
+            <p id="registerSuccess">註冊成功，請登入系統</p>
+ 
+            <p class="loginWarning"><a onclick="change('login')">已經有帳戶了？點此登入</a></p>
+        </div>
+    </section>
+
+    <!-- header -->
+    <header>
+        <nav>
+            <h2><a href="/">台北一日遊</a></h2>
+
+            <ul>
+                <li><a onclick="booking()">預定行程</a></li>
+                <li><a class="stateSwitch" onclick="change('login')">登入/註冊</a></li>
+            </ul>
+        </nav>   
+    </header>
+
+    <!-- main -->
+    <!-- 未預訂 -->
+    <main id="neverOrder">
+        <section class="neverOrder">
+            <p>您好，<span class="memberName">memberName</span>，待預定的行程如下:</p>
+    
+            <p class="explain">目前沒有任何待預訂的行程</p>
+        </section>
+    </main>
+
+    <!-- 已預訂 -->
+    <main id="ordered">
+        <p class="greeting">您好，<span class="memberName">memberName</span>，待預訂的行程如下：</p>
+
+        <section class="ordered">
+            <div class="sightImgAndOrderData">
+                <div class="sightImg"></div>
+    
+                <div class="orderData">
+                    <div class="title">
+                        <p id="TaipeiTrip">台北一日遊 :&nbsp;&nbsp;</p>
+                        <p id="TaipeiSightName">SightName</p>
+                    </div>
+                            
+                    <ul class="orderList">
+                        <li class="date">
+                            <p>日期 :&nbsp;&nbsp;</p> 
+                            <p id="tripDate">date</p>                
+                        </li>
+        
+                        <li class="time">
+                            <p>時間 :&nbsp;&nbsp;</p>
+                            <p id="tripTime">time</p>
+                        </li>
+        
+                        <li class="fee">  
+                            <p>費用 :&nbsp;&nbsp;</p>
+                            <p id="tripFee">fee</p>
+                        </li>
+        
+                        <li class="place">  
+                            <p>地點 :&nbsp;&nbsp;</p>
+                            <p id="tripPlace">place</p>
+                        </li>
+                    </ul>   
+                </div>
+    
+                <img src="../static/img/icon/icon_delete.png" alt="清除景點訂單">
+            </div>
+        </section>
+       
+        <hr class="top">
+
+        <section class="contact">
+            <h2>您的聯絡資訊</h2>
+
+            <ul class="contactBook">
+                <li class="name">
+                    <h4>聯絡姓名：</h4>
+                    <input type="text" id="contactName" name="contactName">                 
+                </li>
+
+                <li class="email">
+                    <h4>連絡信箱：</h4>
+                    <input type="email" id="contactEmail" name="contactEmail">
+                </li>
+
+                <li class="phoneNumber">  
+                    <h4>手機號碼：</h4>
+                    <input type="tel" id="contactPhone" name="contactPhone">
+                </li>
+            </ul>
+            
+            <h4 class="attention">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</h4>
+        </section>
+
+        <hr class="center">
+
+        <section class="payment">
+            <h2>信用卡付款資訊</h2>
+
+            <ul class="creditCardData">
+                <li class="cardNumber">
+                    <h4>卡片號碼：</h4>
+                    <input type="password" id="cardNumber" name="cardNumber" placeholder="**** **** **** ****">                 
+                </li>
+
+                <li class="expirationDate">
+                    <h4>過期時間：</h4>
+                    <input type="text" id="expirationDate" name="expirationDate" placeholder="MM/YY">
+                </li>
+
+                <li class="verifyPwd">  
+                    <h4>驗證密碼：</h4>
+                    <input type="password" id="verifyPwd" name="verifyPwd" placeholder="CVV">
+                </li>
+            </ul>
+        </section>
+
+        <hr class="bottom">
+
+        <section class="checkOrder">
+
+            <div class="checkOrderPrice">
+                <h4>總價：<span>total</span></h4>
+
+                <button type="button" id="checkOrder">確認訂購並付款</button>
+            </div>
+
+        </section>
+    </main>
+
+
+    <!-- footer -->
+    <footer>
+        <p><span>COPYRIGHT &copy; </span>台北一日遊</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='./js/login.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/booking.js') }}"></script>
+</body>
+</html>

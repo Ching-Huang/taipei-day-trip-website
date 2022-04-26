@@ -1,0 +1,735 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 1rem;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+h2, h4, p{   
+    color: #666666;
+}
+hr{
+    width: 75rem;
+    color: #E8E8E8;
+    opacity: 0.3;
+}
+
+/* 登入會員帳號 */
+section.shadow{
+    position: fixed;
+    z-index: 1999;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0.25;
+    display: none;   
+}
+section.login{
+    position: fixed;
+    z-index: 2000;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 340px;
+    border-radius: 5px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 60px #AAAAAA;
+    display: none;
+    // outline: 1px solid red;
+    div.topColorBox{
+        height: 10px;
+        border-radius: 6px 6px 0px 0px;
+        background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+        // outline: 1px solid blue;
+    }
+    div.loginData{
+        display: flex;
+        flex-direction: column;
+        // outline: 1px solid green;
+        div.loginDataTitle{
+            display: flex;
+            align-items: center;
+            margin: 15px 15px 10px 15px;
+            position: relative;
+            // outline: 1px solid red;
+            h2{
+                width: 310px;
+                text-align: center;
+                // outline: 1px solid green;
+            }
+            img{
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                z-index: 100;
+                width: 16px;
+                height: 16px;
+                // outline: 1px solid blue;
+            }
+        }
+        input{
+            width: 310px;
+            height: 47px;
+            line-height: normal;
+            font-size: 1.25rem;
+            margin: 5px 15px;
+            padding: 15px;
+            border: 1px solid #CCCCCC;
+            border-radius: 5px;
+            // outline: 1px solid green; 
+        }
+        input::placeholder{
+            font-size: 1rem;  
+            font-weight: 800;           
+            color: #757575;
+            // outline: 1px solid red;    
+        }
+        input#loginPwd{
+            margin-top: 5px;
+        }
+        .loginBtn{
+            width: 310px;
+            height: 47px;
+            color: #FFFFFF;
+            background: #448899;
+            border:0;
+            outline:none;
+            border-radius: 5px;
+            font-size: 19px;
+            margin: 5px 15px;
+        }
+        p#loginError{
+            width: 310px;
+            height: 47px;
+            line-height: 47px;
+            margin: 0 auto;
+            text-align: center;
+            color: #ff0000;
+            display: none;
+            // outline: 1px solid blue;
+        }
+        p.registerWarning{
+            margin: 5px 15px 15px 15px;
+            text-align: center;
+            // outline: 1px solid blue;
+            a{
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+/* 註冊會員帳號 */
+section.register{
+    position: fixed;
+    z-index: 2000;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 340px;
+    border-radius: 5px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 60px #AAAAAA;
+    display: none;
+    // outline: 1px solid red;
+    div.topColorBox{
+        height: 10px;
+        border-radius: 6px 6px 0px 0px;
+        background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+        // outline: 1px solid blue;
+    }
+    div.registerData{
+        display: flex;
+        flex-direction: column;
+        // outline: 1px solid green;
+        div.registerDataTitle{
+            display: flex;
+            align-items: center;
+            margin: 15px 15px 10px 15px;
+            position: relative;
+            // outline: 1px solid red;
+            h2{
+                width: 310px;
+                text-align: center;
+                // outline: 1px solid green;
+            }
+            img{
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                z-index: 100;
+                width: 16px;
+                height: 16px;
+                // outline: 1px solid blue;
+            }
+        }
+        input{
+            width: 310px;
+            height: 47px;
+            line-height: normal;
+            font-size: 1.25rem;
+            margin: 5px 15px;
+            padding: 15px;
+            border: 1px solid #CCCCCC;
+            border-radius: 5px;
+            // outline: 1px solid green;    
+        }
+        input#registerPwd{
+            margin-top: 5px;
+        }
+        ::placeholder{
+            font-size: 1rem;
+            font-weight: 800;            
+            color: #757575;
+            // outline: 1px solid red;     
+        }
+        .registerBtn{
+            width: 310px;
+            height: 47px;
+            color: #FFFFFF;
+            background: #448899;
+            border:0;
+            outline:none;
+            border-radius: 5px;
+            font-size: 19px;
+            margin: 5px 15px;
+        }
+        p#registerError, p#registerSuccess{
+            width: 310px;
+            height: 47px;
+            line-height: 47px;
+            margin: 0 auto;
+            text-align: center;
+            color: #ff0000;
+            display: none;
+            // outline: 1px solid blue;
+        }
+        p.loginWarning{
+            margin: 5px 15px 15px 15px;
+            text-align: center;
+            // outline: 1px solid blue;
+            a{
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+/* 頁首 */
+header{
+    width: 100%;
+    min-height: 54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 5px 0.5px rgb(107,107,107);
+
+    /*step 1 整個 header 移動時固定在上方 => Sticky Header*/
+    position: sticky; 
+    /*step 2*/
+    top: 0;
+    /*step 3 設定最大數值，確保在整個網頁的最上面*/
+    z-index: 1000;
+
+    // outline: 1px solid red;
+    nav{
+        width: 75rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        // outline: 1px solid blue;        
+        h2{
+            flex: 1 1 100px;
+            a{
+                text-decoration: none;
+                color: #448899;
+            }
+            // outline: 1px solid green;
+        }
+        ul{
+            display: flex;
+            justify-content: flex-end;
+            flex: 3 1 100px;
+            list-style-type: none;
+            width: 70%;
+            // outline: 1px solid green;
+            li{
+                width: 12%;
+                display: flex;
+                justify-content: flex-end;
+                cursor: pointer;
+                // outline: 1px solid red;
+                a{
+                    text-decoration: none;
+                    font-size: 1rem;
+                    color: #666666;
+                }
+            }
+        }
+    }         
+}
+
+/* 未預訂、已預訂 會員登入問候語 */
+main#neverOrder, main#ordered{
+    section.neverOrder{
+        p{
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 35px;
+            span{
+                font-size: 19px;
+                font-weight: 700;
+            } 
+        }
+    }
+    .greeting{
+        font-size: 19px;
+        font-weight: 700;
+        margin-bottom: 35px;
+        span{
+            font-size: 19px;
+            font-weight: 700;
+        } 
+    }
+}
+
+/* 未預訂 */
+main#neverOrder{
+    margin-top: 46px;
+    margin-bottom: 40px;
+    // outline: 1px solid blue;
+    section.neverOrder{
+        width: 980px;
+        margin: 0 auto;
+        // outline: 1px solid red;
+        .explain{
+            font-size: 16px;
+            font-weight: 400;
+        }
+    } 
+}
+
+/* 已預訂 */
+main#ordered{
+    margin-top: 46px;
+    margin-bottom: 62px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // outline: 1px solid red;
+    .greeting{
+        // align-self: center;
+        width: 980px;
+        // outline: 1px solid purple;
+    }
+    section.ordered, section.contact, section.payment, section.checkOrder{
+        width: 980px;
+        ul{
+            list-style-type: none;
+        }
+        // outline: 1px solid blue;
+    }
+    section.ordered{
+        position: relative;
+        // outline: 1px solid purple;
+        .sightImgAndOrderData{
+            display: flex;
+            // outline: 1px solid red;
+            .sightImg{
+                // outline: 1px solid black;
+                width: 266px;
+                height: 200px;
+                background-size: cover;
+            }
+            .orderData{
+                margin-left: 22px;
+                // outline: 1px solid black;
+                .title{
+                    height: 20px;
+                    margin-bottom: 30px;
+                    display: flex;
+                    // outline: 1px solid red;
+                    #TaipeiTrip, #TaipeiSightName{
+                        color: #448899;
+                        font-size: 16px;
+                        font-weight: 700;
+                        // outline: 1px solid black;
+                    }
+                }
+                .orderList{
+                    height: 140px;
+                    // outline: 1px solid red;
+                    .date, .time, .fee{
+                        p{
+                            margin-bottom: 20px;
+                        }
+                    }
+                    .date, .time, .fee, .place{
+                        display: flex;
+                        align-items: center;
+                        p{
+                            height: 20px;
+                            font-size: 16px;
+                            font-weight: 700;
+                            // outline: 1px solid purple;
+                        }
+                        #tripDate, #tripTime, #tripFee, #tripPlace{
+                            font-size: 16px;
+                            font-weight: 400;
+                            // outline: 1px solid black;
+                        }                       
+                    }
+                }                
+            }
+            img{
+                cursor: pointer;
+                position: absolute;
+                right: 0;
+                width: 30px;
+                height: 30px;
+                // outline: 1px solid black;
+            }
+        }
+    } 
+    hr.top, hr.center{
+        margin-bottom: 44px;
+    }
+    hr.top{
+        margin-top: 40px;   
+    }
+    section.contact{
+        h2{
+            margin-bottom: 24px;
+        }
+        .contactBook{
+            .name, .email, .phoneNumber{
+                display: flex;
+                margin-bottom: 15px;
+                // outline: 1px solid red;
+                h4{
+                    align-self: center;
+                }
+                input{
+                    width: 200px;
+                    height: 38px;
+                    line-height: normal;
+                    font-size: 1rem;
+                    border: 1px solid #E8E8E8;
+                    border-radius: 5px;
+                    padding: 10px;
+                    background: #FFFFFF;   
+                }
+            }
+        }
+        .attention{
+            margin-top: 20px;
+            margin-bottom: 5px;
+        }
+    }
+    hr.center{
+        margin-top: 40px;
+    }
+    section.payment{
+        h2{
+            margin-bottom: 24px;
+        }
+        .creditCardData{
+            // outline: 1px solid blue;
+            .cardNumber, .expirationDate, .verifyPwd{
+                display: flex;
+                margin-bottom: 15px;
+                
+                h4{
+                    align-self: center;
+                }
+                input{
+                    width: 200px;
+                    height: 38px;
+                    line-height: normal;
+                    font-size: 1rem;
+                    border: 1px solid #E8E8E8;
+                    border-radius: 5px;
+                    padding: 10px;
+                    background: #FFFFFF;   
+                }
+                input::placeholder{
+                    // font-size: 1rem;          
+                    // outline: 1px solid red;    
+                }
+            }
+        }
+    }
+    hr.bottom{
+        margin-top: 25px;
+        margin-bottom: 43px;
+    }
+    section.checkOrder{
+        width: 980px;
+        display: flex;
+        justify-content: end;
+        // outline: 1px solid black; 
+        div.checkOrderPrice{
+            width: 173px;
+            display: flex;
+            position: relative;
+            // outline: 1px solid blue;
+            h4{
+                position: absolute;
+                right: 0;
+                // outline: 1px solid green;
+            }
+            button#checkOrder{
+                cursor: pointer;
+                width: 173px;
+                height: 36px;
+                line-height: 11px;
+                background: #448899;
+                color: #FFFFFF;
+                font-size: 19px;
+                padding: 10px 20px;
+                outline: none; 
+                border: none;
+                border-radius: 5px;   
+                margin-top: 46px;
+                // outline: 1px solid black;
+            }
+        }
+    }
+}
+
+/* 頁尾 */
+footer{
+    background-color: #757575;
+    display: flex;
+    justify-content: center;
+    min-height: 104px;
+    p{
+        color: #FFFFFF;
+        font-size: 16px;
+        font-weight: 500;
+        margin-top: 45px;
+        text-align: center;
+    }
+}
+
+/* 已預訂 */
+@media screen and (max-width: 1280px){
+    header{
+        nav{
+            width: 80%;
+            ul{
+                li{
+                    width: 14%;
+                }
+            }                          
+        }
+    }
+    /* 已預訂 */
+    main#ordered{
+        .greeting, section.ordered, section.contact, section.payment,section.checkOrder{
+            width: 60%;
+        }
+        hr{
+            width: 1024px;
+        }  
+    }
+}
+@media screen and (max-width: 1024px){
+    header{
+        nav{
+            ul{
+                li{
+                    width: 18%;
+                }
+            }                          
+        }
+    }
+    main#ordered{
+        .greeting{
+            text-align: center;
+        }
+        section.ordered, section.contact, section.payment,section.checkOrder{
+            width: 70%;
+        }
+        section.ordered{
+            .sightImgAndOrderData{
+                flex-wrap: wrap;
+                justify-content: center;
+                .sightImg{                  
+                    width: 620px;
+                    height: 435px;                    
+                }
+                .orderData{
+                    width: 620px;
+                    margin-top: 20px;
+                    margin-left: 0px;
+                    .title{
+                        justify-content: center;   
+                    }
+                }
+                img{
+                    bottom: 0;
+                }
+            }
+        }
+        hr{
+            width: 819px;
+        }    
+    }
+}
+@media screen and (max-width: 870px){
+    header{
+        nav{
+            width: 90%;                          
+        }
+    } 
+    main#ordered{
+        section.ordered, section.contact, section.payment,section.checkOrder{
+            width: 90%;  
+        }
+        hr{
+            width: 100%;
+        }
+    }
+}
+@media screen and (max-width: 690px){
+    header{
+        nav{
+            width: 97%;
+            ul{
+                li{
+                    width: 22%;
+                }
+            }    
+        }
+    } 
+    main#ordered{
+        section.ordered, section.contact, section.payment,section.checkOrder{
+            width: 94.5%;   
+        }
+        section.ordered{
+            .sightImgAndOrderData{
+                .sightImg{                  
+                    width: 500px;
+                    height: 350px;                    
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 520px){
+    header{
+        nav{
+            ul{
+                li{
+                    width: 28%;
+                }
+            }    
+        }
+    }
+    main#ordered{
+        .greeting{ 
+            width: 95%;  
+        }
+    } 
+}
+@media screen and (max-width: 430px){
+    header{
+        nav{
+            width: 95%;
+            ul{
+                justify-content: space-between;
+                li{
+                    width: 80%;
+                }
+            } 
+            h2{
+                flex: 1 1 120px;
+            }   
+        }
+    } 
+    main#ordered{
+        section.ordered{
+            .sightImgAndOrderData{
+                overflow: hidden;
+                .sightImg{                  
+                    width: 340px;
+                    height: 256px;
+                    position: relative;
+                    top: -30px;            
+                }
+                .orderData{
+                    width: 100%;
+                    margin-top: 37px;
+                    position: relative;
+                    top: -30px;
+                    .title{
+                        justify-content: flex-start;   
+                    }
+                }
+            }
+        }
+        hr.top{
+            margin-top: 30px;
+        }
+    }
+}
+@media screen and (max-width: 360px){
+    header{
+        nav{
+            ul{
+                li{
+                    width: 50%;
+                }
+            } 
+            h2{
+                flex: 1 1 120px;
+            }   
+        }
+    } 
+    main#ordered{
+        .greeting{ 
+            align-self: flex-start;
+            text-align: left;
+            margin-left: 10px;
+            margin-bottom: 37px;
+        }
+    }       
+}
+
+/* 未預訂 */
+@media screen and (max-width: 1280px){
+    main#neverOrder{
+        section.neverOrder{
+            width: 80%;
+        }
+    }
+    footer{
+        p{
+            width: 90%;
+        }
+    }
+}
+@media screen and (max-width: 480px){
+    main#neverOrder{
+        padding: 0 10px;
+        section.neverOrder{
+            width: 100%;
+        }
+    } 
+}
+@media screen and (max-width: 380px){
+    main#neverOrder{
+        section.neverOrder{
+            p{
+                font-size: 16px;
+            }
+        }
+    }
+}

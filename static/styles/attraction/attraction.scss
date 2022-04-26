@@ -235,8 +235,11 @@ header{
         align-items: center;
         // outline: 1px solid blue;        
         h2{
-            color: #448899;
             flex: 1 1 100px;
+            a{
+                text-decoration: none;
+                color: #448899;
+            }
             // outline: 1px solid green;
         }
         ul{
@@ -417,6 +420,11 @@ main{
                             margin-top: 0;
                             // outline: 1px solid orchid;
                         }
+                    }
+                    li.dateFormWarning{
+                        color: #ff0000;
+                        margin-top: 10px;
+                        margin-bottom: -15px;
                     }
                     button{
                         width: 154px;

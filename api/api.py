@@ -445,3 +445,161 @@ def handle_500():
     Response = {"error": 'true', "message": '伺服器內部錯誤'}
     return make_response(jsonify(Response), 500)
 
+############################## Part 5 - 1：預定行程 API ################################
+# 儲存 預約行程至 session
+def SaveBookingToSession(SightId, SightName, SightAddress, SightImg, BookingDate, BookingTime, BookingPrice):
+
+    session['SightId']      = SightId 
+    session['SightName']    = SightName 
+    session['SightAddress'] = SightAddress 
+    session['SightImg']     = SightImg  
+    session['BookingDate']  = BookingDate
+    session['BookingTime']  = BookingTime
+    session['BookingPrice'] = BookingPrice
+
+# 讀取 預定行程
+''' 從 Session 讀取預約行程，如 Session 中有紀錄，則依照 API 回傳 內容；
+                                         無    ，則　       回傳 None。'''                                    
+def ReadBookingFromSession():
+
+    state = session.get('SightName')
+    if state == None:
+        return None
+    
+    data = {
+        "attraction": {
+            "id"        : session['SightId'],
+            "name"      : session['SightName'],
+            "address"   : session['SightAddress'],
+            "image"     : session['SightImg']            
+        },
+        "date"  : session['BookingDate'],
+        "time"  : session['BookingTime'],
+        "price" : session['BookingPrice']
+    }
+
+    return data
+        
+# 刪除 預定行程
+def DeleteBookingFromSession():
+
+    state = session.get('SightName')
+    if state == None:
+        return None
+
+    session.pop('SightId')
+    session.pop('SightName')
+    session.pop('SightAddress')
+    session.pop('SightImg')
+    session.pop('BookingDate')
+    session.pop('BookingTime')
+    session.pop('BookingPrice')
+
+def CreateBooking(SightId, BookingDate, BookingTime, BookingPrice):
+
+    print('[DBG] [CreateBooking]')  
+
+    # 查詢資料庫 讀取所預約的景點細節 
+    SearchResult = SearchSightById(SightId)
+    if SearchResult == None:
+        return False
+
+    # 分割圖片
+    imagelist    = SearchResult[9]
+    splitPicList = imagelist.split(',')
+    
+    SightName    = SearchResult[1]    
+    SightAddress = SearchResult[4]    
+    SightImg     = splitPicList[0] 
+
+    # 儲存景點資訊至 Session 中
+    SaveBookingToSession(SightId, SightName, SightAddress, SightImg, BookingDate, BookingTime, BookingPrice)
+    return True
+
+# [API] 取得尚未確認下單的預定行程 
+@Travel_Api.route('/booking', methods=['GET'])
+def get_booking():
+
+    # 查詢 Session 中使用者登入、登出的狀態
+    state = GetSessionState()
+
+    print('[DBG] 1')
+
+    # 若已登入，則回傳 使用者資訊(依照API)
+    if session['state'] == 'Log_in':
+
+        print('[DBG][Log_in] 2')
+
+        # 讀取 預定行程內容
+        ''' 若有，則依照 API 回傳 內容
+              無                 None(null)'''
+        BookingInfo = ReadBookingFromSession()
+
+        print('[DBG] 3 BookingInfo=',BookingInfo)
+
+        Response ={
+                    "data": BookingInfo
+                   }
+
+    else:
+        print('[DBG][Not Log_in] 4')
+        Response = {"error": 'true', "message": '未登入系統，拒絕存取'}
+        return json.dumps(Response, ensure_ascii = False), 403  
+
+    return json.dumps(Response, ensure_ascii = False) 
+
+# [API] 建立新的預定行程資訊
+@Travel_Api.route('/booking', methods=['POST'])
+def create_booking():
+
+    # 取得前端送來的 Request Body 請求資料  
+    RequestBody = request.json
+
+    # 讀取預約資訊
+    SightId         = RequestBody['attractionId']      
+    BookingDate     = RequestBody['date']     
+    BookingTime     = RequestBody['time']
+    BookingPrice    = RequestBody['price']  
+
+    print('[DBG][create_booking] BookingPrice=', BookingPrice)
+    
+    # 查詢 Session 中使用者登入、登出狀態
+    state = GetSessionState()
+
+    # 若已登入，則回傳 使用者資訊(依照API)
+    if session['state'] == 'Log_in':
+    
+        # 建立預約行程
+        CreateResult = CreateBooking(SightId, BookingDate, BookingTime, BookingPrice)
+
+        if CreateResult:
+            Response = {"ok": 'true'}
+            return json.dumps(Response, ensure_ascii = False)
+
+        else:
+            Response = {"error": 'true', "message": '建立失敗，輸入不正確或其他原因'}
+            return json.dumps(Response, ensure_ascii = False), 400
+    
+    else:
+        Response = {"error": 'true', "message": '未登入系統，拒絕存取'}
+        return json.dumps(Response, ensure_ascii = False), 403
+
+# [API] 刪除建立的預定行程
+@Travel_Api.route('/booking', methods=['DELETE'])
+def delete_booking():
+    
+    # 查詢 Session 中使用者登入、登出狀態
+    state = GetSessionState()    
+    
+    # 若已登入，則回傳 使用者資訊(依照API)
+    if session['state'] == 'Log_in':
+        
+        # Delete booking
+        DeleteBookingFromSession()
+        Response ={"ok": 'true'} 
+            
+    else:
+        Response = {"error": 'true', "message": '未登入系統，拒絕存取'}
+        return json.dumps(Response, ensure_ascii = False), 403
+    
+    return json.dumps(Response, ensure_ascii = False)
