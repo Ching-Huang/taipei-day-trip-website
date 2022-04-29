@@ -214,17 +214,17 @@ function getLoginStatus(){
             waitingState.textContent  = '登出系統';
             let onClickName  = `logout()`;
             waitingState.setAttribute('onclick', onClickName);
-            console.log('[DBG]', waitingState);
+            // console.log('[DBG]', waitingState);
         } 
         else if (result.data == null)
         {
             waitingState.textContent  = '登入/註冊';
             let onClickName  = `change('login')`;
             waitingState.setAttribute('onclick', onClickName);
-            console.log('[DBG]', waitingState);
+            // console.log('[DBG]', waitingState);
         }
         
-        console.log('[DBG] [GetLoginStatus] Result = ', result);
+        // console.log('[DBG] [GetLoginStatus] Result = ', result);
     }); 
 }
 

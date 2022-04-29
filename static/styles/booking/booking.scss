@@ -328,7 +328,7 @@ main#ordered{
         width: 980px;
         // outline: 1px solid purple;
     }
-    section.ordered, section.contact, section.payment, section.checkOrder{
+    section.ordered, section.contact, form.payment, section.checkOrder{
         width: 980px;
         ul{
             list-style-type: none;
@@ -435,18 +435,22 @@ main#ordered{
     hr.center{
         margin-top: 40px;
     }
-    section.payment{
+    form.payment{
         h2{
             margin-bottom: 24px;
         }
         .creditCardData{
-            // outline: 1px solid blue;
+            // outline: 1px solid black;
+            // height: 180px;
             .cardNumber, .expirationDate, .verifyPwd{
                 display: flex;
-                margin-bottom: 15px;
-                
+                position: relative;
+                height: 50px;
+                // outline: 1px solid red;
                 h4{
                     align-self: center;
+                    margin-bottom: 15px;
+                    // outline: 1px solid blue;
                 }
                 input{
                     width: 200px;
@@ -456,11 +460,20 @@ main#ordered{
                     border: 1px solid #E8E8E8;
                     border-radius: 5px;
                     padding: 10px;
-                    background: #FFFFFF;   
+                    background: #FFFFFF;
+                    display: none;
+                    // outline: 1px solid blue;
                 }
-                input::placeholder{
-                    // font-size: 1rem;          
-                    // outline: 1px solid red;    
+                .tpfield{
+                    width: 200px;
+                    height: 38px;
+                    outline: 1px solid #e8e8e8;
+                    background: #FFFFFF;
+                    border-radius: 5px;
+                    position: absolute;
+                    left: 80px;
+                    padding: 10px;
+                    // outline: 1px solid purple;
                 }
             }
         }
@@ -472,8 +485,14 @@ main#ordered{
     section.checkOrder{
         width: 980px;
         display: flex;
-        justify-content: end;
-        // outline: 1px solid black; 
+        justify-content: space-between;
+        // outline: 1px solid black;
+        #errorAlert{
+            width: 530px;
+            height: 25px;
+            color: red;
+            // outline: 1px solid black;
+        }
         div.checkOrderPrice{
             width: 173px;
             display: flex;
@@ -532,7 +551,7 @@ footer{
     }
     /* 已預訂 */
     main#ordered{
-        .greeting, section.ordered, section.contact, section.payment,section.checkOrder{
+        .greeting, section.ordered, section.contact, form.payment,section.checkOrder{
             width: 60%;
         }
         hr{
@@ -554,7 +573,7 @@ footer{
         .greeting{
             text-align: center;
         }
-        section.ordered, section.contact, section.payment,section.checkOrder{
+        section.ordered, section.contact, form.payment,section.checkOrder{
             width: 70%;
         }
         section.ordered{
@@ -590,7 +609,7 @@ footer{
         }
     } 
     main#ordered{
-        section.ordered, section.contact, section.payment,section.checkOrder{
+        section.ordered, section.contact, form.payment,section.checkOrder{
             width: 90%;  
         }
         hr{
@@ -610,7 +629,7 @@ footer{
         }
     } 
     main#ordered{
-        section.ordered, section.contact, section.payment,section.checkOrder{
+        section.ordered, section.contact, form.payment,section.checkOrder{
             width: 94.5%;   
         }
         section.ordered{

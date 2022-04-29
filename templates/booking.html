@@ -157,37 +157,40 @@
 
         <hr class="center">
 
-        <section class="payment">
+        <form class="payment">
             <h2>信用卡付款資訊</h2>
 
             <ul class="creditCardData">
                 <li class="cardNumber">
                     <h4>卡片號碼：</h4>
-                    <input type="password" id="cardNumber" name="cardNumber" placeholder="**** **** **** ****">                 
+                    <input type="password" id="cardNumber" name="cardNumber">
+                    <div class="tpfield" id="card-number"></div>                 
                 </li>
 
                 <li class="expirationDate">
                     <h4>過期時間：</h4>
-                    <input type="text" id="expirationDate" name="expirationDate" placeholder="MM/YY">
+                    <label for="expirationDate"></label>
+                    <input type="text" id="expirationDate" name="expirationDate">
+                    <div class="tpfield" id="card-expiration-date"></div>
                 </li>
 
                 <li class="verifyPwd">  
                     <h4>驗證密碼：</h4>
-                    <input type="password" id="verifyPwd" name="verifyPwd" placeholder="CVV">
+                    <input type="password" id="verifyPwd" name="verifyPwd">
+                    <div class="tpfield" id="card-ccv"></div>
                 </li>
             </ul>
-        </section>
+        </form>
 
         <hr class="bottom">
 
         <section class="checkOrder">
+            <div id="errorAlert"></div>
 
             <div class="checkOrderPrice">
                 <h4>總價：<span>total</span></h4>
-
                 <button type="button" id="checkOrder">確認訂購並付款</button>
             </div>
-
         </section>
     </main>
 
@@ -199,5 +202,6 @@
 
     <script src="{{ url_for('static', filename='./js/login.js') }}"></script>
     <script src="{{ url_for('static', filename='./js/booking.js') }}"></script>
+    <script src="https://js.tappaysdk.com/tpdirect/v5.9.0"></script>
 </body>
 </html>

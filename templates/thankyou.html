@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="ShiuanChing Huang"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index,follow"> 
+    <meta name="rating" content="General">
+    <base target="_self">
+    <meta name="description" content="台北一日遊的特定景點和訂購行程等資訊"> 
+    <title>台北一日遊</title>
+    <!-- google font setting -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./styles/thankyou/thankyou.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./styles/index/index.css') }}">
+</head>
+<body>
+    <!-- 登入會員帳號 -->
+    <section class="shadow"></section>
+
+    <section class="login">
+        <div class="topColorBox"></div>
+ 
+        <div class="loginData">
+            <div class="loginDataTitle">
+                <h2>登入會員帳號</h2>
+                <img src="../static/img/icon/icon_close.png" onclick="change('close')" alt="刪除登入會員帳號對話方塊">
+            </div>
+ 
+            <input type="email" id="loginEmail" placeholder="輸入電子信箱">
+ 
+            <input type="password" id="loginPwd" placeholder="輸入密碼">
+ 
+            <button type="button" onclick="login()" class="loginBtn">登入帳戶</button>
+ 
+            <p id="loginError">失敗訊息</p>
+ 
+            <p class="registerWarning"><a onclick="change('register')">還沒有帳戶？點此註冊</a></p>
+        </div>
+    </section>
+ 
+    <!-- 註冊會員帳號 -->
+    <section class="register">
+        <div class="topColorBox"></div>
+ 
+        <div class="registerData">
+            <div class="registerDataTitle">
+                <h2>註冊會員帳號</h2>
+                <img src="../static/img/icon/icon_close.png" onclick="change('close')" alt="刪除註冊會員帳號對話方塊">
+            </div>
+ 
+            <input type="text" id="registerName" placeholder="輸入姓名">
+ 
+            <input type="email" id="registerEmail" placeholder="輸入電子信箱">
+ 
+            <input type="password" id="registerPwd" placeholder="輸入密碼">
+ 
+            <button type="button" class="registerBtn" onclick="register()">註冊新帳戶</button>
+ 
+            <p id="registerError">失敗訊息</p>
+ 
+            <p id="registerSuccess">註冊成功，請登入系統</p>
+ 
+            <p class="loginWarning"><a onclick="change('login')">已經有帳戶了？點此登入</a></p>
+        </div>
+    </section>
+
+    <!-- header -->
+    <header>
+        <nav>
+            <h2><a href="/">台北一日遊</a></h2>
+
+            <ul>
+                <li><a onclick="booking()">預定行程</a></li>
+                <li><a class="stateSwitch" onclick="change('login')">登入/註冊</a></li>
+            </ul>
+        </nav>   
+    </header>
+
+    <!-- main -->
+    <main>
+        <section class="thanksBrief">
+            <p id="thanksText">感謝訂購</p>
+            <img class="fadeIn" src="../static/img/icon/iconmonstr-check-mark-4-64.png" alt="交易成功圖示">
+            <h3 id="succeedPay">交易成功</h3>
+            <h3 id="orderNumber">訂單編號：<span id="order_number"></span></h3>    
+        </section>
+        
+        <section class="tripOrderData">
+            <div class="orderDetail">
+                <p class="orderTitle">訂單行程資訊</p>
+
+                <div class="photo"></div>
+
+                <ul>
+                    <li><b>行程：</b><span class="spot_name"></span></li>
+                    <li><b>日期：</b><span class="date"></span></li>
+                    <li><b>時間：</b><span class="time"></span></li>
+                    <li><b>費用：</b><span class="price"></span></li>
+                    <li><b>地點：</b><span class="address"></span></li>
+                </ul>
+            </div>
+
+            <div class="contactDetail">
+                <h2 class="contactTitle">會員資訊</h2>
+
+                <ul>
+                    <li class="contact_li"><b>聯絡姓名：</b><span id="contact_name"></span></li>
+                    <li class="contact_li"><b>聯絡信箱：</b><span id="contact_email"></span></li>
+                    <li class="contact_li"><b>手機號碼：</b><span id="contact_tel"></span></li>
+                </ul>
+            </div>
+
+            <div class="attention">                
+                <h2 class="warning">注意事項</h2>
+
+                <ul>
+                    <li class="appointment"><b>交易成功後3日內，導遊將主動聯繫您，約定集合的時間地點。</b></li>
+                    <li class="onTime"><b>請保持手機暢通，準時抵達。</b></li>
+                    <li class="keepInTouch"><b>若有任何疑問，請與客服人員聯繫。</b></li>
+                    <li class="phone"><img src="../static/img/icon/iconmonstr-phone-1-32.png" alt="聯絡電話圖示">     0800-917-917</li>
+                    <li class="email"><img src="../static/img/icon/iconmonstr-email-4-32.png" alt="聯絡電子信箱圖示">     TaipeiTripGoGo@email.com</li>
+                    <li class="openTime"><img src="../static/img/icon/iconmonstr-time-3-32.png" alt="營業時間圖示">    週一至週五 09:00-18:00</li>   
+                    <li class="breakTime">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;( 12:00 ~ 13:00 為午休時間 )</li>   
+                    <li class="closeTime">週六 / 週日 / 國定假日及連續假期不營業</li>   
+               </ul>
+            </div>            
+        </section>
+    </main>
+
+    <!-- footer -->
+    <footer>
+        <p><span>COPYRIGHT &copy; </span>台北一日遊</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/thankyou.js') }}"></script>
+</body>
+</html>

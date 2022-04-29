@@ -1,0 +1,613 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html{
+    height: 100%;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+ul{
+    list-style: none;
+}  
+  
+/* 登入會員帳號 */
+section.shadow{
+    position: fixed;
+    z-index: 1999;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0.25;
+    display: none;   
+}
+section.login{
+    position: fixed;
+    z-index: 2000;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 340px;
+    border-radius: 5px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 60px #AAAAAA;
+    display: none;
+    // outline: 1px solid red;
+    div.topColorBox{
+        height: 10px;
+        border-radius: 6px 6px 0px 0px;
+        background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+        // outline: 1px solid blue;
+    }
+    div.loginData{
+        display: flex;
+        flex-direction: column;
+        // outline: 1px solid green;
+        div.loginDataTitle{
+            display: flex;
+            align-items: center;
+            margin: 15px 15px 10px 15px;
+            position: relative;
+            // outline: 1px solid red;
+            h2{
+                width: 310px;
+                text-align: center;
+                // outline: 1px solid green;
+            }
+            img{
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                z-index: 100;
+                width: 16px;
+                height: 16px;
+                // outline: 1px solid blue;
+            }
+        }
+        input{
+            width: 310px;
+            height: 47px;
+            line-height: normal;
+            font-size: 1.25rem;
+            margin: 5px 15px;
+            padding: 15px;
+            border: 1px solid #CCCCCC;
+            border-radius: 5px;
+            // outline: 1px solid green; 
+        }
+        input::placeholder{
+            font-size: 1rem;  
+            font-weight: 800;           
+            color: #757575;
+            // outline: 1px solid red;    
+        }
+        input#loginPwd{
+            margin-top: 5px;
+        }
+        .loginBtn{
+            width: 310px;
+            height: 47px;
+            color: #FFFFFF;
+            background: #448899;
+            border:0;
+            outline:none;
+            border-radius: 5px;
+            font-size: 19px;
+            margin: 5px 15px;
+        }
+        p#loginError{
+            width: 310px;
+            height: 47px;
+            line-height: 47px;
+            margin: 0 auto;
+            text-align: center;
+            color: #ff0000;
+            display: none;
+            // outline: 1px solid blue;
+        }
+        p.registerWarning{
+            margin: 5px 15px 15px 15px;
+            text-align: center;
+            // outline: 1px solid blue;
+            a{
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+/* 註冊會員帳號 */
+section.register{
+    position: fixed;
+    z-index: 2000;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 340px;
+    border-radius: 5px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 60px #AAAAAA;
+    display: none;
+    // outline: 1px solid red;
+    div.topColorBox{
+        height: 10px;
+        border-radius: 6px 6px 0px 0px;
+        background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+        // outline: 1px solid blue;
+    }
+    div.registerData{
+        display: flex;
+        flex-direction: column;
+        // outline: 1px solid green;
+        div.registerDataTitle{
+            display: flex;
+            align-items: center;
+            margin: 15px 15px 10px 15px;
+            position: relative;
+            // outline: 1px solid red;
+            h2{
+                width: 310px;
+                text-align: center;
+                // outline: 1px solid green;
+            }
+            img{
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                z-index: 100;
+                width: 16px;
+                height: 16px;
+                // outline: 1px solid blue;
+            }
+        }
+        input{
+            width: 310px;
+            height: 47px;
+            line-height: normal;
+            font-size: 1.25rem;
+            margin: 5px 15px;
+            padding: 15px;
+            border: 1px solid #CCCCCC;
+            border-radius: 5px;
+            // outline: 1px solid green;    
+        }
+        input#registerPwd{
+            margin-top: 5px;
+        }
+        ::placeholder{
+            font-size: 1rem;
+            font-weight: 800;            
+            color: #757575;
+            // outline: 1px solid red;     
+        }
+        .registerBtn{
+            width: 310px;
+            height: 47px;
+            color: #FFFFFF;
+            background: #448899;
+            border:0;
+            outline:none;
+            border-radius: 5px;
+            font-size: 19px;
+            margin: 5px 15px;
+        }
+        p#registerError, p#registerSuccess{
+            width: 310px;
+            height: 47px;
+            line-height: 47px;
+            margin: 0 auto;
+            text-align: center;
+            color: #ff0000;
+            display: none;
+            // outline: 1px solid blue;
+        }
+        p.loginWarning{
+            margin: 5px 15px 15px 15px;
+            text-align: center;
+            // outline: 1px solid blue;
+            a{
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+/* 頁首 */
+header{
+    width: 100%;
+    min-height: 54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 5px 0.5px rgb(107,107,107);
+
+    /*step 1 整個 header 移動時固定在上方 => Sticky Header*/
+    position: sticky; 
+    /*step 2*/
+    top: 0;
+    /*step 3 設定最大數值，確保在整個網頁的最上面*/
+    z-index: 1000;
+
+    // outline: 1px solid red;
+    nav{
+        width: 75rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        // outline: 1px solid blue;        
+        h2{
+            flex: 1 1 100px;
+            a{
+                text-decoration: none;
+                color: #448899;
+            }
+            // outline: 1px solid green;
+        }
+        ul{
+            display: flex;
+            justify-content: flex-end;
+            flex: 3 1 100px;
+            list-style-type: none;
+            width: 70%;
+            // outline: 1px solid green;
+            li{
+                width: 12%;
+                display: flex;
+                justify-content: flex-end;
+                cursor: pointer;
+                // outline: 1px solid red;
+                a{
+                    text-decoration: none;
+                    font-size: 1rem;
+                    color: #666666;
+                }
+            }
+        }
+    }         
+}
+
+main{
+    // outline: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .thanksBrief{
+        display: flex;
+        flex-direction: column;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        // outline: 1px solid blue;
+        #thanksText, h3{
+            text-align: center;
+            letter-spacing: 2px;
+            // outline: 1px solid black;
+        }
+        #thanksText{
+            color: #448899;
+            font-size: 36px;
+            font-weight: 700;
+        }
+        .fadeIn{
+            width: 60px;
+            height: 60px;
+            align-self: center;
+            margin: 10px 0;
+            animation: PayOK 1s infinite;  
+        }
+        @keyframes PayOK{
+            0%{ transform: rotateY(0deg); }
+            100%{ transform: rotateY(360deg); }   
+        }
+        #succeedPay{
+            color: #FF0000;
+            font-size: 28px;
+        }
+        #orderNumber{
+            color: #666666;
+        }
+    }
+    .tripOrderData{
+        display: flex;
+        width: 1000px;
+        margin-bottom: 15px;
+        // outline: 1px solid red;
+        .orderDetail{
+            width: 330px;
+            border-radius: 6px;
+            border: 1px solid #DDDDDD;
+            // outline: 1px solid blue;
+            .orderTitle{
+                text-align: center;
+                background-color: #448899;
+                background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+                border-radius: 6px 6px 0px 0px;
+                color: #FFFFFF;
+                font-size: 24px;
+                font-weight: 500;
+                padding: 5px 0;
+            }
+            .photo {
+                width: 328px;
+                height: 256px;
+                background-color: #eee;
+                background-size: cover;
+                margin-bottom: 10px;
+                // outline: 1px solid black;
+            }
+            ul{
+                margin: 20px;
+                // outline: 1px solid blue;
+                li{
+                    b{
+                        color: #666666;
+                    } 
+                    span{
+                        color: #666666;
+                    }                   
+                }
+            }
+        }
+        .contactDetail{
+            width: 340px;
+            margin-left: 5px;
+            margin-right: 5px;
+            border-radius: 6px;
+            border: 1px solid #DDDDDD;
+            // outline: 1px solid blue;
+            .contactTitle{
+                text-align: center;
+                background-color: #448899;
+                background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+                border-radius: 6px 6px 0px 0px;
+                color: #FFFFFF;
+                margin-bottom: 10px;
+                font-weight: 500;
+                padding: 5px 0;
+            }
+            ul{
+                margin: 20px;
+                // outline: 1px solid purple;
+                li{
+                    b{
+                        color: #666666;
+                    } 
+                    span{
+                        color: #666666;
+                    }                   
+                }
+            }
+        }
+        .attention{
+            width: 340px;
+            border-radius: 6px;
+            border: 1px solid #DDDDDD;
+            // outline: 1px solid blue;
+            .warning{
+                text-align: center;
+                background-color: #448899;
+                background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+                border-radius: 6px 6px 0px 0px;
+                color: #FFFFFF;
+                font-weight: 500;
+                padding: 5px 0;
+            }
+            ul{
+                margin: 20px;
+                height: 400px;
+                position: relative;
+                // outline: 1px solid blue;
+                li{
+                    height: 24px;
+                    color: #666666;
+                    margin-bottom: 40px;
+                    // outline: 1px solid blue;
+                    b{
+                        color: #666666;
+                    }
+                    img{
+                        width: 24px;
+                        height: 24px;
+                        vertical-align: middle;
+                        margin-bottom: 3px;
+                    }                               
+                }
+                .onTime{
+                    margin-top: 10px;
+                    margin-bottom: 16px;
+                }
+                .keepInTouch{
+                    margin-bottom: 65px;
+                }
+                .phone, .email, .openTime, .breakTime, .closeTime{
+                    position: absolute;
+                }
+                .phone{
+                    bottom: 100px;
+                }
+                .email{
+                    bottom: 50px;
+                }
+                .openTime{
+                    bottom: 0px;
+                }
+                .breakTime{
+                    bottom: -20px;
+                }
+                .closeTime{
+                    color: #FF0000;
+                    bottom: -40px;                   
+                }    
+            }
+        }
+    }
+}
+            
+/* 頁尾 */
+footer{
+    background-color: #757575;
+    display: flex;
+    justify-content: center;
+    min-height: 104px;
+    p{
+        color: #FFFFFF;
+        font-size: 16px;
+        font-weight: 500;
+        margin-top: 45px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 1600px){
+    main{
+        section.tripOrderData{
+            width: 1000px;
+        }
+    }   
+}
+@media screen and (max-width: 1024px){
+    main{
+        section.tripOrderData{
+            flex-direction: column;
+            width: 500px;
+            margin-top: -1px;
+            .orderDetail{
+                width: 500px;
+                margin-bottom: 19px;    
+                .photo {
+                    width: 100%;
+                    height: 350px;    
+                }
+            }
+            .contactDetail{
+                width: 500px;
+                margin-bottom: 19px;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            .attention{
+                width: 500px;
+                margin-bottom: -10px;
+                ul{               
+                    height: 246px;                    
+                    .onTime{
+                        margin-top: -30px;
+                        margin-bottom: 10px;
+                    }
+                    .phone{
+                        bottom: 70px;
+                    }
+                    .email{
+                        bottom: 35px;
+                    }
+                }
+            }
+        }
+    }   
+}
+@media screen and (max-width: 540px){
+    main{
+        section.thanksBrief{
+            #thanksText{
+                font-size: 24px;
+            }
+            .fadeIn{
+                width: 50px;
+                height: 50px;
+            }
+            #succeedPay{
+                font-size: 20px;
+            }
+            #order_number{
+                letter-spacing: 1px;
+            }  
+        }
+        section.tripOrderData{            
+            width: 350px;           
+            .orderDetail{
+                width: 350px;
+                .orderTitle{
+                    font-size: 22px;
+                }
+                .photo {
+                    width: 348px;
+                    height: 262px;    
+                } 
+                ul{
+                    margin: 15px;
+                }              
+            }
+            .contactDetail{
+                width: 350px;
+                .contactTitle{
+                    font-size: 22px;
+                }
+                ul{                  
+                    margin: 15px;
+                }
+            }
+            .attention{
+                width: 350px;
+                .warning{
+                    font-size: 22px;
+                }
+                ul{
+                    height: 276px;
+                    margin: 15px;
+                    li{
+                        margin-bottom: 60px;
+                    }
+                    .onTime{
+                        margin-bottom: 6px;
+                    }
+                    .phone{
+                        bottom: 60px;
+                    }
+                    .email{
+                        bottom: 20px;
+                    }
+                    .openTime{
+                        bottom: -20px;
+                    }
+                    .breakTime{
+                        bottom: -40px;
+                    }
+                    .closeTime{
+                        bottom: -60px;                   
+                    } 
+                }      
+            }
+        }
+    }
+}
+@media screen and (max-width: 375px){
+    main{
+        section.thanksBrief{
+            .fadeIn{
+                width: 45px;
+                height: 45px;
+            }
+            #order_number{
+                letter-spacing: 0.5px;
+            }  
+        }
+        section.tripOrderData{            
+            width: 320px;           
+            .orderDetail{
+                width: 320px;
+                .photo {
+                    width: 318px;
+                    height: 240px;
+                }
+            }
+            .contactDetail{
+                width: 320px;
+            }
+            .attention{
+                width: 320px;
+            }
+        }
+    }
+}
