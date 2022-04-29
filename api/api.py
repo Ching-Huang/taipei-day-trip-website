@@ -1,5 +1,9 @@
 from flask import *
 
+from datetime import datetime
+
+import requests
+
 # 導入 JSON 模組
 import json
 
@@ -20,18 +24,25 @@ website = {
     'database' : DB_Name
 }
 
+DB_Setting = {  
+    'host'     : DB_Host,
+    'user'     : DB_User,
+    'password' : DB_Pwd,
+    'database' : DB_Name
+}
+
 # 查詢比對資料庫中的 email/password 是否正確
 def VerifyLogin(email, password):
 
-    connectioin = mysql.connector.connect(**website)
-    cursor = connectioin.cursor()
+    connection = mysql.connector.connect(**website)
+    cursor = connection.cursor()
 
     sql = "SELECT * FROM member WHERE email = %s and password = %s"
     variable = (email, password, )
     cursor.execute(sql, variable)
     SearchResult = cursor.fetchone()
     cursor.close()
-    connectioin.close()
+    connection.close()
 
     if SearchResult == None:
         print('[DBG] == 無該筆資料 ==')
@@ -43,15 +54,15 @@ def VerifyLogin(email, password):
 # [查]讀取 database 資料，查詢 資料庫中有無 此email( email )
 def SearchMemberByEmail(email):
 
-    connectioin = mysql.connector.connect(**website)
-    cursor = connectioin.cursor()
+    connection = mysql.connector.connect(**website)
+    cursor = connection.cursor()
    
     sql = "SELECT * FROM member WHERE email = %s"
     variable = (email, )
     cursor.execute(sql, variable)
     SearchResult = cursor.fetchone()
     cursor.close()
-    connectioin.close()
+    connection.close()
        
     '''若無  此email(會印出 空[])，則回傳 null ;
        反之         (會印出 值)  ，則回傳 搜尋結果資料'''
@@ -62,20 +73,116 @@ def SearchMemberByEmail(email):
         print('[DBG] == 搜尋結果如下 ==')
         return SearchResult
 
+# [查]讀取 database 資料，查詢 資料庫中有無 此訂單編號
+def SearchOrderByNumber(OrderNumber):
+    connection = mysql.connector.connect(**DB_Setting)
+    cursor = connection.cursor()
+
+    sql = "SELECT * FROM orders WHERE ordernumber = %s"
+    variable = (OrderNumber, )
+    cursor.execute(sql, variable)
+    SearchResult = cursor.fetchone()
+    cursor.close()
+    connection.close()
+
+    '''若無 此訂單編號(會印出 空[])，則回傳 null ;
+       反之          (會印出 值)  ，則回傳 搜尋結果資料'''
+    if SearchResult == []:
+        #print('== 無該筆景點資料 ==')
+        return None
+    else:
+        #print('== 搜尋結果如下 ==')
+        return SearchResult
+
 # [增]新增 1 筆會員資料到 database 中
 # database => member table
 def AddNewMemberToDB(name, email, password):
 
-    connectioin = mysql.connector.connect(**website)
-    cursor = connectioin.cursor()
+    connection = mysql.connector.connect(**website)
+    cursor = connection.cursor()
     
     sql = "INSERT INTO member (name, email, password) VALUES (%s, %s, %s)"
     member = (name, email, password)
     cursor.execute(sql, member)
-    connectioin.commit()        
+    connection.commit()        
     cursor.close()
-    connectioin.close()
+    connection.close()
 
+# [增]新增訂單到 database 中  
+def AddNewOrderToDB(SerialNumber, RequestBody, PayStatus):
+    connection = mysql.connector.connect(**DB_Setting)
+    cursor = connection.cursor()  
+    
+    MemberId        = session['id']
+    OrderNumber     = SerialNumber
+    SpotID          = RequestBody['order']['trip']['attraction']['id']
+    SpotName        = RequestBody['order']['trip']['attraction']['name']
+    SpotAddr        = RequestBody['order']['trip']['attraction']['address']
+    SpotImg         = RequestBody['order']['trip']['attraction']['image']
+    OrderPrice      = RequestBody['order']['price']   
+    OrderDate       = RequestBody['order']['trip']['date']
+    OrderTime       = RequestBody['order']['trip']['time']    
+    ContactName     = RequestBody['order']['contact']['name']
+    ContactEmail    = RequestBody['order']['contact']['email']
+    ContactPhone    = RequestBody['order']['contact']['phone']
+    OrderStatus     = PayStatus
+    
+    sql = "INSERT INTO orders \
+    (memberid, ordernumber, spotid, spotname, spotaddress, spotimage, orderprice, orderdate, ordertime, contactname, contactmail, contactphone, status)\
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    
+    order = (MemberId, OrderNumber, SpotID, SpotName, SpotAddr, SpotImg, OrderPrice, OrderDate, OrderTime, ContactName, ContactEmail, ContactPhone, OrderStatus)   
+    cursor.execute(sql, order)
+    connection.commit()        
+    cursor.close()
+    connection.close()
+
+# 撰寫函數 Build_Resp_OrderJSON 輸入，資料庫回傳結果為建立 response 的 JSON 格式
+def Build_Resp_OrderJSON(OrderData):
+
+    dataList = []
+        
+    ordernumber  = OrderData[2]
+    spotid       = OrderData[3]
+    spotname     = OrderData[4]
+    spotaddress  = OrderData[5]
+    spotimage    = OrderData[6]
+    orderprice   = OrderData[7]
+    orderdate    = OrderData[8]
+    ordertime    = OrderData[9]
+    contactname  = OrderData[10]
+    contactmail  = OrderData[11]
+    contactphone = OrderData[12]
+    status       = OrderData[13]
+
+    data = {
+        "number": ordernumber,
+        "price" : orderprice,
+        "trip": {
+          "attraction": {
+            "id"     : spotid,
+            "name"   : spotname,
+            "address": spotaddress,
+            "image"  : spotimage
+          },
+          "date": orderdate,
+          "time": ordertime
+        },
+        "contact": {
+          "name" : contactname,
+          "email": contactmail,
+          "phone": contactphone
+        },
+        "status": status
+    }
+    
+    Response = {
+		"data" : data
+	}
+    
+    return Response
+
+###########################################################################################
 # 取得目前 session 中的 state 狀態
 def GetSessionState():
     state = session.get("state")
@@ -101,8 +208,8 @@ def ClearSession():
 # 撰寫一函數 SearchSight() 輸入 page 以及 keyword 回傳 資料庫的搜尋結果
 def SearchSight(page, keyword):
 
-    connectioin = mysql.connector.connect(**website)
-    cursor = connectioin.cursor()
+    connection = mysql.connector.connect(**website)
+    cursor = connection.cursor()
 
     # 若無給定 page ，則為 第 0 頁
     if page == None:
@@ -130,7 +237,7 @@ def SearchSight(page, keyword):
     cursor.execute(sql, variable)
     SearchResult = cursor.fetchall()
     cursor.close()
-    connectioin.close()
+    connection.close()
 
     ''' 若搜尋無結果 (會印出 空[])，則回傳 null ;
         反之         (會印出 值) ，則回傳 搜尋結果資料 '''
@@ -142,8 +249,8 @@ def SearchSight(page, keyword):
 # 處理 關鍵字 回傳搜尋結果的 總共有幾筆	
 def SearchSightCount(keyword):
 
-    connectioin = mysql.connector.connect(**website)
-    cursor = connectioin.cursor()
+    connection = mysql.connector.connect(**website)
+    cursor = connection.cursor()
 
     if keyword == None:   
        keyword = ''
@@ -161,7 +268,7 @@ def SearchSightCount(keyword):
     SearchResult = cursor.fetchone()
 
     cursor.close()
-    connectioin.close() 
+    connection.close() 
 
     TotalCount   = SearchResult[0]
     
@@ -218,8 +325,8 @@ def Build_Resp_SightDataJSON(SearchResult, nextPageNum):
 # [查]讀取 database 資料，查詢 資料庫中有無 此景點編號( id )
 def SearchSightById(id):
 
-    connectioin = mysql.connector.connect(**website)
-    cursor = connectioin.cursor()
+    connection = mysql.connector.connect(**website)
+    cursor = connection.cursor()
 
     sql = "SELECT * FROM sightdata WHERE id = %s"
     variable = (id, )
@@ -227,7 +334,7 @@ def SearchSightById(id):
     SearchResult = cursor.fetchone()
 
     cursor.close()
-    connectioin.close()
+    connection.close()
 
     '''若無 此景點編號(會印出 空[])，則回傳 null ;
        反之          (會印出 值)  ，則回傳 搜尋結果資料'''
@@ -603,3 +710,159 @@ def delete_booking():
         return json.dumps(Response, ensure_ascii = False), 403
     
     return json.dumps(Response, ensure_ascii = False)
+#####################################################################################
+'''
+    測試卡號 4242 4242 4242 4242 
+    到期月 01 到期年 2023 
+    後三碼 123
+'''
+PartnerKey = 'partner_UCmom3DehHDY0I7CQLnb1EysgJYP92IZxuwncrXfHm1lv5yde4uUkncG'
+
+def TapPayByPrime(PayData):
+
+    print('[DBG] TapPayByPrime()')
+    
+    TapPayUrl = 'https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime'
+ 
+    # 發送 api 至 TapPay
+    Response = requests.post( TapPayUrl, 
+                              json    = PayData,
+                              headers = { 
+                                            'Content-Type': 'application/json',
+                                            'x-api-key'   : PartnerKey
+                                        }
+                            ) 
+
+    print('[DBG] Response      =', Response) 
+    print('[DBG] Response.text =', Response.text) 
+
+    return json.loads(Response.text)
+
+def CreateOrder(RequestBody):   
+
+    print('[DBG] CreateOrder()')
+    
+    # 讀取訂單資訊
+    Prime           = RequestBody['prime'] 
+    OrderPrice      = RequestBody['order']['price']   
+    SpotID          = RequestBody['order']['trip']['attraction']['id']
+    SpotName        = RequestBody['order']['trip']['attraction']['name']
+    SpotAddr        = RequestBody['order']['trip']['attraction']['address']
+    SpotImg         = RequestBody['order']['trip']['attraction']['image']
+    OrderDate       = RequestBody['order']['trip']['date']
+    OrderTime       = RequestBody['order']['trip']['time']    
+    ContactName     = RequestBody['order']['contact']['name']
+    ContactEmail    = RequestBody['order']['contact']['email']
+    ContactPhone    = RequestBody['order']['contact']['phone']
+
+    print('[DBG] Prime         = ',Prime       ) 
+    print('[DBG] OrderPrice    = ',OrderPrice  ) 
+    print('[DBG] SpotID        = ',SpotID      ) 
+    print('[DBG] SpotName      = ',SpotName    ) 
+    print('[DBG] SpotAddr      = ',SpotAddr    ) 
+    print('[DBG] SpotImg       = ',SpotImg     ) 
+    print('[DBG] OrderDate     = ',OrderDate   ) 
+    print('[DBG] OrderTime     = ',OrderTime   ) 
+    print('[DBG] ContactName   = ',ContactName ) 
+    print('[DBG] ContactEmail  = ',ContactEmail) 
+    print('[DBG] ContactPhone  = ',ContactPhone)
+    
+    # 建立訂單編號
+    OrderNumber = (datetime.now().strftime('%Y%m%d%H%M%S%f'))
+    print('[DBG] OrderNumber = ', OrderNumber)
+    
+    # 設定TapPay 傳送資料
+    PayData = {
+        "prime"       : Prime,
+        "partner_key" : PartnerKey,
+        "merchant_id" : "koala520_CTBC",
+        "details"     : "測試 TapPay 123 123",
+        "amount"      : OrderPrice,
+        "cardholder": {
+            "phone_number": ContactPhone,
+            "name"        : ContactName,
+            "email"       : ContactEmail      
+        },
+        "remember": False
+    }
+    
+    # 連線至 TapPay 付款
+    PayResult = TapPayByPrime(PayData)
+    
+    # 將訂單資料與付款結果 存於資料庫
+    AddNewOrderToDB(OrderNumber, RequestBody, PayResult['status'])    
+    
+    '''
+      建立回傳資料
+    '''
+    # TapPay 狀態
+    # 刷卡成功 status  = 0
+    # 刷卡失敗 status != 0
+    if PayResult['status'] != 0:
+    
+        Response = {"error": 'true', "message": PayResult['msg']}    
+        return False, Response
+        
+    else: # TapPay 刷卡成功
+        
+        # 刷卡成功 刪除預約行程
+        # DeleteBookingFromSession()
+    
+        Response = {
+            "data" :
+                {
+                    "number" : OrderNumber,
+                    "payment": 
+                    {
+                        "status" : PayResult['status'],
+                        "message": "付款成功"
+                    }            
+                }        
+        }        
+        return True, Response
+
+# [API] 建立訂單付款
+@Travel_Api.route('/orders', methods=['POST'])
+def create_order():
+    
+    print('[DBG][create_order]')  
+    
+    # 取得前端送來的 Request Body 請求資料  
+    RequestBody = request.json
+    
+    # 查詢session中使用者登入、登出狀態
+    state = GetSessionState()    
+    
+    # 若已登入，則
+    if session['state'] == 'Log_in':
+    
+        # 建立訂單
+        CreateResult, Response = CreateOrder(RequestBody)
+        
+        if CreateResult:            
+            return json.dumps(Response, ensure_ascii = False)
+        else:
+            return json.dumps(Response, ensure_ascii = False), 400
+    else:
+        Response = {"error": 'true', "message": '未登入系統，拒絕存取'}
+        return json.dumps(Response, ensure_ascii = False), 403
+
+# [API] 取得訂單
+@Travel_Api.route("/order/<OrderNumber>", methods = ['GET'])
+def get_order(OrderNumber):
+
+    print('[DBG] OrderNumber=', OrderNumber)
+    
+    # 如已登入則
+    if session['state'] == 'Log_in':
+    
+        # 搜尋資料庫中有無此訂單編號
+        OrderData = SearchOrderByNumber(OrderNumber)
+        Response  = Build_Resp_OrderJSON(OrderData)
+        
+        return json.dumps(Response, ensure_ascii = False)
+       
+    else:
+        Response = {"error": 'true', "message": '未登入系統，拒絕存取'}
+        return json.dumps(Response, ensure_ascii = False), 403
+  

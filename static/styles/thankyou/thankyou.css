@@ -1,0 +1,760 @@
+@charset "UTF-8";
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+/* 登入會員帳號 */
+section.shadow {
+  position: fixed;
+  z-index: 1999;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0.25;
+  display: none;
+}
+
+section.login {
+  position: fixed;
+  z-index: 2000;
+  top: 30%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 340px;
+  border-radius: 5px;
+  background: #FFFFFF;
+  -webkit-box-shadow: 0px 4px 60px #AAAAAA;
+          box-shadow: 0px 4px 60px #AAAAAA;
+  display: none;
+}
+
+section.login div.topColorBox {
+  height: 10px;
+  border-radius: 6px 6px 0px 0px;
+  background: -webkit-gradient(linear, right top, left top, from(#337788), to(#66AABB));
+  background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+}
+
+section.login div.loginData {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+section.login div.loginData div.loginDataTitle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 15px 15px 10px 15px;
+  position: relative;
+}
+
+section.login div.loginData div.loginDataTitle h2 {
+  width: 310px;
+  text-align: center;
+}
+
+section.login div.loginData div.loginDataTitle img {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 100;
+  width: 16px;
+  height: 16px;
+}
+
+section.login div.loginData input {
+  width: 310px;
+  height: 47px;
+  line-height: normal;
+  font-size: 1.25rem;
+  margin: 5px 15px;
+  padding: 15px;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+}
+
+section.login div.loginData input::-webkit-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.login div.loginData input:-ms-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.login div.loginData input::-ms-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.login div.loginData input::placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.login div.loginData input#loginPwd {
+  margin-top: 5px;
+}
+
+section.login div.loginData .loginBtn {
+  width: 310px;
+  height: 47px;
+  color: #FFFFFF;
+  background: #448899;
+  border: 0;
+  outline: none;
+  border-radius: 5px;
+  font-size: 19px;
+  margin: 5px 15px;
+}
+
+section.login div.loginData p#loginError {
+  width: 310px;
+  height: 47px;
+  line-height: 47px;
+  margin: 0 auto;
+  text-align: center;
+  color: #ff0000;
+  display: none;
+}
+
+section.login div.loginData p.registerWarning {
+  margin: 5px 15px 15px 15px;
+  text-align: center;
+}
+
+section.login div.loginData p.registerWarning a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 註冊會員帳號 */
+section.register {
+  position: fixed;
+  z-index: 2000;
+  top: 30%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 340px;
+  border-radius: 5px;
+  background: #FFFFFF;
+  -webkit-box-shadow: 0px 4px 60px #AAAAAA;
+          box-shadow: 0px 4px 60px #AAAAAA;
+  display: none;
+}
+
+section.register div.topColorBox {
+  height: 10px;
+  border-radius: 6px 6px 0px 0px;
+  background: -webkit-gradient(linear, right top, left top, from(#337788), to(#66AABB));
+  background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+}
+
+section.register div.registerData {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+section.register div.registerData div.registerDataTitle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 15px 15px 10px 15px;
+  position: relative;
+}
+
+section.register div.registerData div.registerDataTitle h2 {
+  width: 310px;
+  text-align: center;
+}
+
+section.register div.registerData div.registerDataTitle img {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 100;
+  width: 16px;
+  height: 16px;
+}
+
+section.register div.registerData input {
+  width: 310px;
+  height: 47px;
+  line-height: normal;
+  font-size: 1.25rem;
+  margin: 5px 15px;
+  padding: 15px;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+}
+
+section.register div.registerData input#registerPwd {
+  margin-top: 5px;
+}
+
+section.register div.registerData ::-webkit-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.register div.registerData :-ms-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.register div.registerData ::-ms-input-placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.register div.registerData ::placeholder {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #757575;
+}
+
+section.register div.registerData .registerBtn {
+  width: 310px;
+  height: 47px;
+  color: #FFFFFF;
+  background: #448899;
+  border: 0;
+  outline: none;
+  border-radius: 5px;
+  font-size: 19px;
+  margin: 5px 15px;
+}
+
+section.register div.registerData p#registerError, section.register div.registerData p#registerSuccess {
+  width: 310px;
+  height: 47px;
+  line-height: 47px;
+  margin: 0 auto;
+  text-align: center;
+  color: #ff0000;
+  display: none;
+}
+
+section.register div.registerData p.loginWarning {
+  margin: 5px 15px 15px 15px;
+  text-align: center;
+}
+
+section.register div.registerData p.loginWarning a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 頁首 */
+header {
+  width: 100%;
+  min-height: 54px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 0 0 5px 0.5px #6b6b6b;
+          box-shadow: 0 0 5px 0.5px #6b6b6b;
+  /*step 1 整個 header 移動時固定在上方 => Sticky Header*/
+  position: -webkit-sticky;
+  position: sticky;
+  /*step 2*/
+  top: 0;
+  /*step 3 設定最大數值，確保在整個網頁的最上面*/
+  z-index: 1000;
+}
+
+header nav {
+  width: 75rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header nav h2 {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 100px;
+          flex: 1 1 100px;
+}
+
+header nav h2 a {
+  text-decoration: none;
+  color: #448899;
+}
+
+header nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-flex: 3;
+      -ms-flex: 3 1 100px;
+          flex: 3 1 100px;
+  list-style-type: none;
+  width: 70%;
+}
+
+header nav ul li {
+  width: 12%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  cursor: pointer;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #666666;
+}
+
+main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main .thanksBrief {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+main .thanksBrief #thanksText, main .thanksBrief h3 {
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+main .thanksBrief #thanksText {
+  color: #448899;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+main .thanksBrief .fadeIn {
+  width: 60px;
+  height: 60px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin: 10px 0;
+  -webkit-animation: PayOK 1s infinite;
+          animation: PayOK 1s infinite;
+}
+
+@-webkit-keyframes PayOK {
+  0% {
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+  100% {
+    -webkit-transform: rotateY(360deg);
+            transform: rotateY(360deg);
+  }
+}
+
+@keyframes PayOK {
+  0% {
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+  100% {
+    -webkit-transform: rotateY(360deg);
+            transform: rotateY(360deg);
+  }
+}
+
+main .thanksBrief #succeedPay {
+  color: #FF0000;
+  font-size: 28px;
+}
+
+main .thanksBrief #orderNumber {
+  color: #666666;
+}
+
+main .tripOrderData {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 1000px;
+  margin-bottom: 15px;
+}
+
+main .tripOrderData .orderDetail {
+  width: 330px;
+  border-radius: 6px;
+  border: 1px solid #DDDDDD;
+}
+
+main .tripOrderData .orderDetail .orderTitle {
+  text-align: center;
+  background-color: #448899;
+  background: -webkit-gradient(linear, right top, left top, from(#337788), to(#66AABB));
+  background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+  border-radius: 6px 6px 0px 0px;
+  color: #FFFFFF;
+  font-size: 24px;
+  font-weight: 500;
+  padding: 5px 0;
+}
+
+main .tripOrderData .orderDetail .photo {
+  width: 328px;
+  height: 256px;
+  background-color: #eee;
+  background-size: cover;
+  margin-bottom: 10px;
+}
+
+main .tripOrderData .orderDetail ul {
+  margin: 20px;
+}
+
+main .tripOrderData .orderDetail ul li b {
+  color: #666666;
+}
+
+main .tripOrderData .orderDetail ul li span {
+  color: #666666;
+}
+
+main .tripOrderData .contactDetail {
+  width: 340px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 6px;
+  border: 1px solid #DDDDDD;
+}
+
+main .tripOrderData .contactDetail .contactTitle {
+  text-align: center;
+  background-color: #448899;
+  background: -webkit-gradient(linear, right top, left top, from(#337788), to(#66AABB));
+  background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+  border-radius: 6px 6px 0px 0px;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+  font-weight: 500;
+  padding: 5px 0;
+}
+
+main .tripOrderData .contactDetail ul {
+  margin: 20px;
+}
+
+main .tripOrderData .contactDetail ul li b {
+  color: #666666;
+}
+
+main .tripOrderData .contactDetail ul li span {
+  color: #666666;
+}
+
+main .tripOrderData .attention {
+  width: 340px;
+  border-radius: 6px;
+  border: 1px solid #DDDDDD;
+}
+
+main .tripOrderData .attention .warning {
+  text-align: center;
+  background-color: #448899;
+  background: -webkit-gradient(linear, right top, left top, from(#337788), to(#66AABB));
+  background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+  border-radius: 6px 6px 0px 0px;
+  color: #FFFFFF;
+  font-weight: 500;
+  padding: 5px 0;
+}
+
+main .tripOrderData .attention ul {
+  margin: 20px;
+  height: 400px;
+  position: relative;
+}
+
+main .tripOrderData .attention ul li {
+  height: 24px;
+  color: #666666;
+  margin-bottom: 40px;
+}
+
+main .tripOrderData .attention ul li b {
+  color: #666666;
+}
+
+main .tripOrderData .attention ul li img {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin-bottom: 3px;
+}
+
+main .tripOrderData .attention ul .onTime {
+  margin-top: 10px;
+  margin-bottom: 16px;
+}
+
+main .tripOrderData .attention ul .keepInTouch {
+  margin-bottom: 65px;
+}
+
+main .tripOrderData .attention ul .phone, main .tripOrderData .attention ul .email, main .tripOrderData .attention ul .openTime, main .tripOrderData .attention ul .breakTime, main .tripOrderData .attention ul .closeTime {
+  position: absolute;
+}
+
+main .tripOrderData .attention ul .phone {
+  bottom: 100px;
+}
+
+main .tripOrderData .attention ul .email {
+  bottom: 50px;
+}
+
+main .tripOrderData .attention ul .openTime {
+  bottom: 0px;
+}
+
+main .tripOrderData .attention ul .breakTime {
+  bottom: -20px;
+}
+
+main .tripOrderData .attention ul .closeTime {
+  color: #FF0000;
+  bottom: -40px;
+}
+
+/* 頁尾 */
+footer {
+  background-color: #757575;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  min-height: 104px;
+}
+
+footer p {
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 45px;
+  text-align: center;
+}
+
+@media screen and (max-width: 1600px) {
+  main section.tripOrderData {
+    width: 1000px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  main section.tripOrderData {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 500px;
+    margin-top: -1px;
+  }
+  main section.tripOrderData .orderDetail {
+    width: 500px;
+    margin-bottom: 19px;
+  }
+  main section.tripOrderData .orderDetail .photo {
+    width: 100%;
+    height: 350px;
+  }
+  main section.tripOrderData .contactDetail {
+    width: 500px;
+    margin-bottom: 19px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  main section.tripOrderData .attention {
+    width: 500px;
+    margin-bottom: -10px;
+  }
+  main section.tripOrderData .attention ul {
+    height: 246px;
+  }
+  main section.tripOrderData .attention ul .onTime {
+    margin-top: -30px;
+    margin-bottom: 10px;
+  }
+  main section.tripOrderData .attention ul .phone {
+    bottom: 70px;
+  }
+  main section.tripOrderData .attention ul .email {
+    bottom: 35px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  main section.thanksBrief #thanksText {
+    font-size: 24px;
+  }
+  main section.thanksBrief .fadeIn {
+    width: 50px;
+    height: 50px;
+  }
+  main section.thanksBrief #succeedPay {
+    font-size: 20px;
+  }
+  main section.thanksBrief #order_number {
+    letter-spacing: 1px;
+  }
+  main section.tripOrderData {
+    width: 350px;
+  }
+  main section.tripOrderData .orderDetail {
+    width: 350px;
+  }
+  main section.tripOrderData .orderDetail .orderTitle {
+    font-size: 22px;
+  }
+  main section.tripOrderData .orderDetail .photo {
+    width: 348px;
+    height: 262px;
+  }
+  main section.tripOrderData .orderDetail ul {
+    margin: 15px;
+  }
+  main section.tripOrderData .contactDetail {
+    width: 350px;
+  }
+  main section.tripOrderData .contactDetail .contactTitle {
+    font-size: 22px;
+  }
+  main section.tripOrderData .contactDetail ul {
+    margin: 15px;
+  }
+  main section.tripOrderData .attention {
+    width: 350px;
+  }
+  main section.tripOrderData .attention .warning {
+    font-size: 22px;
+  }
+  main section.tripOrderData .attention ul {
+    height: 276px;
+    margin: 15px;
+  }
+  main section.tripOrderData .attention ul li {
+    margin-bottom: 60px;
+  }
+  main section.tripOrderData .attention ul .onTime {
+    margin-bottom: 6px;
+  }
+  main section.tripOrderData .attention ul .phone {
+    bottom: 60px;
+  }
+  main section.tripOrderData .attention ul .email {
+    bottom: 20px;
+  }
+  main section.tripOrderData .attention ul .openTime {
+    bottom: -20px;
+  }
+  main section.tripOrderData .attention ul .breakTime {
+    bottom: -40px;
+  }
+  main section.tripOrderData .attention ul .closeTime {
+    bottom: -60px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  main section.thanksBrief .fadeIn {
+    width: 45px;
+    height: 45px;
+  }
+  main section.thanksBrief #order_number {
+    letter-spacing: 0.5px;
+  }
+  main section.tripOrderData {
+    width: 320px;
+  }
+  main section.tripOrderData .orderDetail {
+    width: 320px;
+  }
+  main section.tripOrderData .orderDetail .photo {
+    width: 318px;
+    height: 240px;
+  }
+  main section.tripOrderData .contactDetail {
+    width: 320px;
+  }
+  main section.tripOrderData .attention {
+    width: 320px;
+  }
+}
+/*# sourceMappingURL=thankyou.css.map */

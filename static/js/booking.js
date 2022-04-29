@@ -69,7 +69,7 @@ async function initialLoginStatus(){
         window.location.href = "/"; 
     }
     else{ 
-        
+
         // 已預訂 Banner，顯示 歡迎訊息
         let orderedBanner = document.querySelector('.greeting .memberName');
         orderedBanner.textContent = Result['data']['name'];   
@@ -88,6 +88,9 @@ async function loadDoneCallback(){
    
     // 渲染畫面
     renderData(Result);
+
+    /* 初始化 TapPay */
+    initialTapPay();  
    
     /* 
         [DOM] 取得 刪除行程 按鈕
@@ -95,6 +98,16 @@ async function loadDoneCallback(){
     */
     let DeleteBookingBtn = document.querySelector('.sightImgAndOrderData img');
     DeleteBookingBtn.addEventListener('click', deleteBookingBtnCallback);
+
+    /* 
+        [DOM] 取得 確認訂購並付款 按鈕
+        按鈕綁監聽，付款   
+    */
+    let ConfirmBtn = document.querySelector("button#checkOrder");
+    ConfirmBtn.addEventListener('click', function(e){
+                e.preventDefault();
+                confirmBtnCallback(Result);
+    }); 
 }
 
 // 按鈕 點擊刪除行程 callback
@@ -172,6 +185,209 @@ function renderData(BookingInfo){
     fee.textContent   = `新台幣 ${BookingPrice} 元`;
     place.textContent = SightAddress;
     total.textContent = `新台幣 ${BookingPrice} 元`;
+}
+
+function initialTapPay()
+{    
+    let APP_ID  = 124301;
+    let APP_KEY = 'app_wdUhNv0x3NTm1tzQBGaiFQAImHFjDSZKDwFTbcHHx1CPArcwexUpBuDgWgTv';    
+    
+    /*
+        設定TapPay連線資訊
+        - appID         TapPay帳號  appid
+        - appKey        TapPay帳號  appkey
+        - serverType    使用的伺服器種類
+                        測試時請使用 Sandbox 環境 (‘sandbox’)
+                        實體上線後請切換至 Production 環境 ('production’)
+    */
+    TPDirect.setupSDK(APP_ID, APP_KEY, 'sandbox');
+    
+    /* 設定外觀 */
+    let fields = {
+        number: {
+            // css selector
+            element    : '#card-number',
+            placeholder: '**** **** **** ****'
+        },
+        expirationDate: {
+            // DOM object
+            element    : document.getElementById('card-expiration-date'),
+            placeholder: 'MM / YY'
+        },
+        ccv: {
+            element    : '#card-ccv',
+            placeholder: '後三碼'
+        }
+    }
+
+    /* 設定CSS外觀 */
+    TPDirect.card.setup({
+        fields: fields,
+        styles: {
+            // Style all elements
+            'input': {
+                'color': 'gray'
+            },
+            // Styling ccv field
+            'input.ccv': {
+                // 'font-size': '16px'
+            },
+            // Styling expiration-date field
+            'input.expiration-date': {
+                // 'font-size': '16px'
+            },
+            // Styling card-number field
+            'input.card-number': {
+                // 'font-size': '16px'
+            },
+            // style focus state
+            ':focus': {
+                // 'color': 'black'
+            },
+            // style valid state
+            '.valid': {
+                'color': 'green'
+            },
+            // style invalid state
+            '.invalid': {
+                'color': 'red'
+            },
+            // Media queries
+            // Note that these apply to the iframe, not the root window.
+            '@media screen and (max-width: 400px)': {
+                'input': {
+                    'color': 'orange'
+                }
+            }
+        }
+    })    
+}
+
+/* 確認訂購並付款 */
+function confirmBtnCallback(BookingInfo)
+{    
+    console.log('[DBG] confirmBtnCallback');
+    
+    // 取得景點與預約資訊
+    let SightId         = BookingInfo.data.attraction.id;
+    let SightName       = BookingInfo.data.attraction.name; 
+    let SightAddress    = BookingInfo.data.attraction.address;
+    let SightImg        = BookingInfo.data.attraction.image;    
+    let BookingDate     = BookingInfo.data.date;
+    let BookingTime     = BookingInfo.data.time;
+    let BookingPrice    = BookingInfo.data.price; 
+    
+    /* 讀取 and 驗證 聯絡資訊格式是否正確 */
+    
+    // 正規表示法 Pattern
+    let ReNamePattern  = /^[\u4e00-\u9fa5]{2,12}$|^[a-zA-Z\s]{3,30}$/;                   // Name
+    let ReEmailPattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;  // Email
+    let RePhonePattern = /^09[0-9]{8}$/;                                                 // Phone
+        
+    let ContactName    = document.getElementById("contactName").value;
+    let ContactEmail   = document.getElementById("contactEmail").value;
+    let ContactPhone   = document.getElementById("contactPhone").value;
+    let ErrorAlert     = document.getElementById("errorAlert");
+    
+    let CheckNameFormat  = ReNamePattern.test(ContactName);
+    let CheckEmailFormat = ReEmailPattern.test(ContactEmail);
+    let CheckPhoneFormat = RePhonePattern.test(ContactPhone);    
+    
+    // 若聯絡資訊 任一欄位 輸入格式有誤，則列印提醒訊息 且停止訂購
+    if (CheckNameFormat== false || CheckNameFormat == false || CheckPhoneFormat == false)
+    {
+        if (CheckNameFormat == false)
+            ErrorAlert.textContent = "*請輸入正確的中文姓名或英文姓名";
+        
+        if (CheckEmailFormat == false)
+            ErrorAlert.textContent = "*信箱格式不正確";
+        
+        if (CheckPhoneFormat == false)
+            ErrorAlert.textContent = "*手機號碼格式不正確";
+        
+        return;
+    } 
+    
+    // 確認信用卡相關欄位，是否符合信用卡規則 
+    // 且確認是否可以 getPrime 
+    const tappayStatus = TPDirect.card.getTappayFieldsStatus();    
+    if (tappayStatus.canGetPrime === false) 
+    {
+        ErrorAlert.textContent = "*請輸入正確信用卡資訊";
+        console.log('[DBG] can not get prime');
+        return;
+    }
+    
+    // 連線至TapPay，將卡號轉換成 Prime
+    TPDirect.card.getPrime((result) => {
+        
+        if (result.status !== 0) 
+        {
+            ErrorAlert.textContent = "*請輸入正確信用卡資訊";
+            console.log('[DBG] get prime error ' + result.msg);
+            return;
+        }
+        
+        let Prime = result.card.prime;
+        console.log('[DBG] get prime 成功，prime: ' + Prime);
+
+		// 建立傳送至後端 api/orders 資料 
+        let order_data = {
+           "prime": Prime,
+           "order":{
+               "price"  : BookingPrice,
+               "trip"   : {
+                   "attraction": {
+                       "id"      : SightId,
+                       "name"    : SightName,
+                       "address" : SightAddress,
+                       "image"   : SightImg
+                   },
+                   "date" : BookingDate,
+                   "time" : BookingTime
+                },
+               "contact": {
+                   "name"  : ContactName,
+                   "email" : ContactEmail,
+                   "phone" : ContactPhone
+                }
+            }
+        }
+
+        //呼叫 API 將 Prime 送至後端
+        fetch('/api/orders',
+            {
+                method  : 'POST',
+                body    :  JSON.stringify(order_data),
+                headers :{ 'Content-Type': 'application/json;'}
+            }
+        )
+        .then(res => 
+            {
+                return res.json();
+            }
+        )
+        .then(result => 
+            {
+                console.log('[DBG] [orders] Result = ', result);
+                 
+                if ("error" in result)                
+                {
+                    
+                } 
+                else  // 若付款成功，則跳轉至 thankyou 頁面
+                {
+                    let query = result["data"]["number"];
+                    
+                    // 跳轉預定行程頁面
+                    location.href = "/thankyou?number=" + query; 
+                    
+                    // 移除已付款預約行程
+                    // deleteBookingBtnCallback();                    
+                }
+            }
+        )
+    })
 }
 
 // 取得目前會員 登入狀態，若 未登入，則 跳轉首頁
